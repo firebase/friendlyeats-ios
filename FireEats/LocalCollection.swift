@@ -62,24 +62,8 @@ final class LocalCollection<T: DocumentSerializable> {
   func listen() {
     guard listener == nil else { return }
 
-    // Codelab step 2: download data
-    listener = query.addSnapshotListener { [unowned self] querySnapshot, error in
-      guard let snapshot = querySnapshot else {
-        print("Error fetching snapshot results: \(error!)")
-        return
-      }
-      let models = snapshot.documents.map { (document) -> T in
-        if let model = T(dictionary: document.data()) {
-          return model
-        } else {
-          // handle error
-          fatalError("Unable to initialize type \(T.self) with dictionary \(document.data())")
-        }
-      }
-      self.items = models
-      self.documents = snapshot.documents
-      self.updateHandler(snapshot.documentChanges)
-    }
+    // Displaying data, part one
+
   }
 
   func stopListening() {

@@ -62,7 +62,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
         collection.stopListening()
       }
       localCollection = LocalCollection(query: query) { [unowned self] changes in
-        self.tableView.reloadData() // TODO: better updates to show off diff handling
+        self.tableView.reloadData()
       }
     }
   }
@@ -120,20 +120,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
       let ratingCount = 0
       let averageRating: Float = 0
 
-      // Codelab step 1
-
-      let collection = Firestore.firestore().collection("restaurants")
-
-      let restaurant = Restaurant(
-        name: name,
-        category: category,
-        city: city,
-        price: price,
-        ratingCount: ratingCount,
-        averageRating: averageRating
-      )
-
-      collection.addDocument(data: restaurant.dictionary)
+      // Basic writes
     }
   }
 
@@ -174,13 +161,9 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
   func tableView(_ tableView: UITableView,
                  commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      // Codelab step 4
-      let reference = localCollection.documents[indexPath.row].reference
-      reference.delete { error in
-        if let error = error {
-          print("Error deleting document: \(error)")
-        }
-      }
+
+      // Deleting documents
+
     }
   }
 
@@ -195,46 +178,7 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
                   sortBy: String?) {
     var filtered = baseQuery()
 
-    // Codelab step 3
-
-    if let category = category, !category.isEmpty {
-      filtered = filtered.whereField("category", isEqualTo: category)
-
-      categoryFilterLabel.text = category
-      categoryFilterLabel.isHidden = false
-    } else {
-      categoryFilterLabel.isHidden = true
-    }
-
-    if let city = city, !city.isEmpty {
-      filtered = filtered.whereField("city", isEqualTo: city)
-
-      cityFilterLabel.text = city
-      cityFilterLabel.isHidden = false
-    } else {
-      cityFilterLabel.isHidden = true
-    }
-
-    if let price = price {
-      filtered = filtered.whereField("price", isEqualTo: price)
-
-      priceFilterLabel.text = priceString(from: price)
-      priceFilterLabel.isHidden = false
-    } else {
-      priceFilterLabel.isHidden = true
-    }
-
-    if let sortBy = sortBy, !sortBy.isEmpty {
-      filtered = filtered.order(by: sortBy)
-    }
-
-    if categoryFilterLabel.isHidden && priceFilterLabel.isHidden && cityFilterLabel.isHidden {
-      stackViewHeightConstraint.constant = 0
-      activeFiltersStackView.isHidden = true
-    } else {
-      stackViewHeightConstraint.constant = 44
-      activeFiltersStackView.isHidden = false
-    }
+    // Advanced queries
 
     self.query = filtered
     localCollection.listen()
@@ -272,12 +216,8 @@ class RestaurantTableViewCell: UITableViewCell {
   }
 
   func populate(restaurant: Restaurant) {
-    // Codelab step 2.5
-    nameLabel.text = restaurant.name
-    cityLabel.text = restaurant.city
-    categoryLabel.text = restaurant.category
-    starsView.rating = Int(restaurant.averageRating.rounded())
-    priceLabel.text = priceString(from: restaurant.price)
+
+    // Displaying data, part two
 
     let imageURL = randomImageURL()
     thumbnailView.sd_setImage(with: imageURL)

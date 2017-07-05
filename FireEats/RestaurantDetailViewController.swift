@@ -101,26 +101,12 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
   // MARK: - ReviewFormTableViewCellDelegate
 
   func reviewFormCell(_ cell: ReviewFormTableViewCell, didSubmitFormWithReview review: Review) {
-    // TODO codelab step 5
-    guard let reference = restaurantReference, let restaurant = restaurant else { return }
+    guard let reference = restaurantReference else { return }
     let reviewsCollection = reference.collection("ratings")
     let newReviewReference = reviewsCollection.document()
-    let newAverage = (Float(restaurant.ratingCount) * restaurant.averageRating + Float(review.rating))
-        / Float(restaurant.ratingCount + 1)
 
-    let firestore = Firestore.firestore()
-    firestore.runTransaction({ (transaction, errorPointer) -> Any? in
-      transaction.setData(review.dictionary, forDocument: newReviewReference)
-      transaction.updateData([
-        "numRatings": restaurant.ratingCount + 1,
-        "avgRating": newAverage
-      ], forDocument: reference)
-      return nil
-    }) { (object, error) in
-      if let error = error {
-        print(error)
-      }
-    }
+    // Writing data in a transaction
+
   }
 
 }
