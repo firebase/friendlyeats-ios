@@ -61,6 +61,8 @@ final class LocalCollection<T: DocumentSerializable> {
 
   func listen() {
     guard listener == nil else { return }
+
+    // Codelab step 2: download data
     listener = query.addSnapshotListener { [unowned self] querySnapshot, error in
       guard let snapshot = querySnapshot else {
         print("Error fetching snapshot results: \(error!)")

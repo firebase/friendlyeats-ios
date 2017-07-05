@@ -62,7 +62,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
         collection.stopListening()
       }
       localCollection = LocalCollection(query: query) { [unowned self] changes in
-        self.tableView.reloadData()
+        self.tableView.reloadData() // TODO: better updates to show off diff handling
       }
     }
   }
@@ -120,6 +120,10 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
       let ratingCount = 0
       let averageRating: Float = 0
 
+      // Codelab step 1
+
+      let collection = Firestore.firestore().collection("restaurants")
+
       let restaurant = Restaurant(
         name: name,
         category: category,
@@ -129,7 +133,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
         averageRating: averageRating
       )
 
-      Firestore.firestore().collection("restaurants").addDocument(data: restaurant.dictionary)
+      collection.addDocument(data: restaurant.dictionary)
     }
   }
 
@@ -167,6 +171,19 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
     self.navigationController?.pushViewController(controller, animated: true)
   }
 
+  func tableView(_ tableView: UITableView,
+                 commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      // Codelab step 4
+      let reference = localCollection.documents[indexPath.row].reference
+      reference.delete { error in
+        if let error = error {
+          print("Error deleting document: \(error)")
+        }
+      }
+    }
+  }
+
 }
 
 extension RestaurantsTableViewController: FiltersViewControllerDelegate {
@@ -177,6 +194,8 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
                   price: Int?,
                   sortBy: String?) {
     var filtered = baseQuery()
+
+    // Codelab step 3
 
     if let category = category, !category.isEmpty {
       filtered = filtered.whereField("category", isEqualTo: category)
@@ -205,17 +224,16 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
       priceFilterLabel.isHidden = true
     }
 
-    // TODO: refactor this method, so we're not using view state to check filter logic.
+    if let sortBy = sortBy, !sortBy.isEmpty {
+      filtered = filtered.order(by: sortBy)
+    }
+
     if categoryFilterLabel.isHidden && priceFilterLabel.isHidden && cityFilterLabel.isHidden {
       stackViewHeightConstraint.constant = 0
       activeFiltersStackView.isHidden = true
     } else {
       stackViewHeightConstraint.constant = 44
       activeFiltersStackView.isHidden = false
-    }
-
-    if let sortBy = sortBy, !sortBy.isEmpty {
-      filtered = filtered.order(by: sortBy)
     }
 
     self.query = filtered
@@ -254,15 +272,15 @@ class RestaurantTableViewCell: UITableViewCell {
   }
 
   func populate(restaurant: Restaurant) {
+    // Codelab step 2.5
     nameLabel.text = restaurant.name
     cityLabel.text = restaurant.city
     categoryLabel.text = restaurant.category
     starsView.rating = Int(restaurant.averageRating.rounded())
+    priceLabel.text = priceString(from: restaurant.price)
 
     let imageURL = randomImageURL()
     thumbnailView.sd_setImage(with: imageURL)
-
-    priceLabel.text = priceString(from: restaurant.price)
   }
 
   override func prepareForReuse() {

@@ -101,6 +101,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
   // MARK: - ReviewFormTableViewCellDelegate
 
   func reviewFormCell(_ cell: ReviewFormTableViewCell, didSubmitFormWithReview review: Review) {
+    // TODO codelab step 5
     guard let reference = restaurantReference, let restaurant = restaurant else { return }
     let reviewsCollection = reference.collection("ratings")
     let newReviewReference = reviewsCollection.document()
