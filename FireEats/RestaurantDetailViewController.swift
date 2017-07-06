@@ -107,6 +107,45 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
 
     // Writing data in a transaction
 
+    let firestore = Firestore.firestore()
+    firestore.runTransaction({ (transaction, errorPointer) -> Any? in
+
+      // Read data from Firestore inside the transaction, so we don't accidentally
+      // update using staled client data. Error if we're unable to read here.
+      let restaurantSnapshot: DocumentSnapshot
+      do {
+        try restaurantSnapshot = transaction.getDocument(reference)
+      } catch let error as NSError {
+        errorPointer?.pointee = error
+        return nil
+      }
+
+      // Error if the restaurant data in Firestore has somehow changed or is malformed.
+      guard let restaurant = Restaurant(dictionary: restaurantSnapshot.data()) else {
+        let error = NSError(domain: "FireEatsErrorDomain", code: 0, userInfo: [
+          NSLocalizedDescriptionKey: "Unable to write to restaurant at Firestore path: \(reference.path)"
+          ])
+        errorPointer?.pointee = error
+        return nil
+      }
+
+      // Update the restaurant's rating and rating count and post the new review at the
+      // same time.
+      let newAverage = (Float(restaurant.ratingCount) * restaurant.averageRating + Float(review.rating))
+        / Float(restaurant.ratingCount + 1)
+
+      transaction.setData(review.dictionary, forDocument: newReviewReference)
+      transaction.updateData([
+        "numRatings": restaurant.ratingCount + 1,
+        "avgRating": newAverage
+        ], forDocument: reference)
+      return nil
+    }) { (object, error) in
+      if let error = error {
+        print(error)
+      }
+    }
+
   }
 
 }
