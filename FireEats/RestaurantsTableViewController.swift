@@ -73,23 +73,6 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
     // Display data from Firestore, part one
 
-    listener = query.addSnapshotListener { [unowned self] (snapshot, error) in
-      guard let snapshot = snapshot else {
-        print("Error fetching snapshot results: \(error!)")
-        return
-      }
-      let models = snapshot.documents.map { (document) -> Restaurant in
-        if let model = Restaurant(dictionary: document.data()) {
-          return model
-        } else {
-          // Don't use fatalError here in a real app.
-          fatalError("Unable to initialize type \(Restaurant.self) with dictionary \(document.data())")
-        }
-      }
-      self.restaurants = models
-      self.documents = snapshot.documents
-      self.tableView.reloadData()
-    }
   }
 
   fileprivate func stopObserving() {
@@ -149,20 +132,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
       let ratingCount = 0
       let averageRating: Float = 0
 
-      // Basic writes
-
-      let collection = Firestore.firestore().collection("restaurants")
-
-      let restaurant = Restaurant(
-        name: name,
-        category: category,
-        city: city,
-        price: price,
-        ratingCount: ratingCount,
-        averageRating: averageRating
-      )
-
-      collection.addDocument(data: restaurant.dictionary)
+      // Write data to Firestore
     }
   }
 
@@ -208,14 +178,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
                  commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
 
-      // Deleting documents
-
-      let reference = documents[indexPath.row].reference
-      reference.delete { error in
-        if let error = error {
-          print("Error deleting document: \(error)")
-        }
-      }
+      // Deleting data
 
     }
   }
@@ -224,44 +187,38 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
 extension RestaurantsTableViewController: FiltersViewControllerDelegate {
 
+  func query(withCategory category: String?, city: String?, price: Int?, sortBy: String?) -> Query {
+    var filtered = baseQuery()
+
+    // Sorting and filtering data
+
+    return filtered
+  }
+
   func controller(_ controller: FiltersViewController,
                   didSelectCategory category: String?,
                   city: String?,
                   price: Int?,
                   sortBy: String?) {
-    var filtered = baseQuery()
-
-    // Advanced queries
+    let filtered = query(withCategory: category, city: city, price: price, sortBy: sortBy)
 
     if let category = category, !category.isEmpty {
-      filtered = filtered.whereField("category", isEqualTo: category)
-
       categoryFilterLabel.text = category
       categoryFilterLabel.isHidden = false
     } else {
       categoryFilterLabel.isHidden = true
     }
-
     if let city = city, !city.isEmpty {
-      filtered = filtered.whereField("city", isEqualTo: city)
-
       cityFilterLabel.text = city
       cityFilterLabel.isHidden = false
     } else {
       cityFilterLabel.isHidden = true
     }
-
     if let price = price {
-      filtered = filtered.whereField("price", isEqualTo: price)
-
       priceFilterLabel.text = priceString(from: price)
       priceFilterLabel.isHidden = false
     } else {
       priceFilterLabel.isHidden = true
-    }
-    
-    if let sortBy = sortBy, !sortBy.isEmpty {
-      filtered = filtered.order(by: sortBy)
     }
 
     self.query = filtered
@@ -301,7 +258,7 @@ class RestaurantTableViewCell: UITableViewCell {
 
   func populate(restaurant: Restaurant) {
 
-    // Displaying data, part two
+    // Display data from Firestore, part two
 
     nameLabel.text = restaurant.name
     cityLabel.text = restaurant.city
