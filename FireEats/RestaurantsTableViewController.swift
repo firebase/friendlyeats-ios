@@ -260,12 +260,6 @@ class RestaurantTableViewCell: UITableViewCell {
 
     // Display data from Firestore, part two
 
-    nameLabel.text = restaurant.name
-    cityLabel.text = restaurant.city
-    categoryLabel.text = restaurant.category
-    starsView.rating = Int(restaurant.averageRating.rounded())
-    priceLabel.text = priceString(from: restaurant.price)
-
     let imageURL = randomImageURL()
     thumbnailView.sd_setImage(with: imageURL)
   }
