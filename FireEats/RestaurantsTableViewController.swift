@@ -37,7 +37,7 @@ func priceString(from price: Int) -> String {
 }
 
 private func imageURL(from string: String) -> URL {
-  let number = (string.hashValue % 22) + 1
+  let number = (abs(string.hashValue) % 22) + 1
   let URLString =
       "https://storage.googleapis.com/firestorequickstarts.appspot.com/food_\(number).png"
   return URL(string: URLString)!

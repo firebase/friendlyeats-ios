@@ -186,7 +186,10 @@ class RestaurantTitleTableViewCell: UITableViewCell {
       gradient.startPoint = CGPoint(x: 0, y: 0)
       gradient.endPoint = CGPoint(x: 0, y: 1.4)
       gradient.opacity = 0.42
-      gradient.frame = titleImageView.layer.bounds
+      gradient.frame = CGRect(x: 0,
+                              y: 0,
+                              width: UIScreen.main.bounds.width,
+                              height: titleImageView.bounds.height)
 
       titleImageView.layer.addSublayer(gradient)
       titleImageView.contentMode = .scaleAspectFill
