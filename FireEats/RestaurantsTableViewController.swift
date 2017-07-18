@@ -36,11 +36,11 @@ func priceString(from price: Int) -> String {
   return priceText
 }
 
-private func randomImageURL() -> URL {
-  let randomImageNumber = Int(arc4random_uniform(22)) + 1
-  let randomImageURLString =
-  "https://storage.googleapis.com/firestorequickstarts.appspot.com/food_\(randomImageNumber).png"
-  return URL(string: randomImageURLString)!
+private func imageURL(from string: String) -> URL {
+  let number = (string.hashValue % 22) + 1
+  let URLString =
+      "https://storage.googleapis.com/firestorequickstarts.appspot.com/food_\(number).png"
+  return URL(string: URLString)!
 }
 
 class RestaurantsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -168,7 +168,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     let controller = RestaurantDetailViewController.fromStoryboard()
-    controller.titleImageURL = randomImageURL()
+    controller.titleImageURL = imageURL(from: restaurants[indexPath.row].name)
     controller.restaurant = restaurants[indexPath.row]
     controller.restaurantReference = documents[indexPath.row].reference
     self.navigationController?.pushViewController(controller, animated: true)
@@ -260,8 +260,8 @@ class RestaurantTableViewCell: UITableViewCell {
 
     // Display data from Firestore, part two
 
-    let imageURL = randomImageURL()
-    thumbnailView.sd_setImage(with: imageURL)
+    let image = imageURL(from: restaurant.name)
+    thumbnailView.sd_setImage(with: image)
   }
 
   override func prepareForReuse() {
