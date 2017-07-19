@@ -26,7 +26,6 @@ DerivedData
 
 .DS_Store
 Pods/
-Podfile.lock
 *.xcworkspace/
 FireEats/GoogleService-Info.plist
 
