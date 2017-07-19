@@ -14,6 +14,29 @@ For more information about Firestore visit [the docs][firestore-docs].
     any email and password.
   * When you first open the app it will be empty, press the
     **Populate** button in the top left.
+  * Modify your Firestore security rules to allow reading and writing reviews and restaurants. Take a look at the rules below for reference.
+
+## Rules
+
+Here's an adequate set of rules for running FireEats.
+
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /restaurants/{any}/ratings/{rating} {
+      // Users can only write ratings with their user ID
+      allow read;
+      allow write: if request.auth.uid == request.resource.userId;
+    }
+
+    match /restaurants/{any} {
+      // Only authenticated users can read or write data
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
+```
 
 ## Indexes
 As you use the app's filter functionality you may see warnings
