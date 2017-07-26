@@ -204,22 +204,6 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
     self.navigationController?.pushViewController(controller, animated: true)
   }
 
-  func tableView(_ tableView: UITableView,
-                 commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-
-      // Deleting documents
-
-      let reference = documents[indexPath.row].reference
-      reference.delete { error in
-        if let error = error {
-          print("Error deleting document: \(error)")
-        }
-      }
-
-    }
-  }
-
 }
 
 extension RestaurantsTableViewController: FiltersViewControllerDelegate {
