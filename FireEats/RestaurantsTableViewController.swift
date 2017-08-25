@@ -78,6 +78,14 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    // Red bar with white color
+    navigationController?.navigationBar.barTintColor =
+      UIColor.init(red: 211/255, green: 47/255, blue: 47/255, alpha: 1.0)
+    navigationController?.navigationBar.isTranslucent = false
+    navigationController?.navigationBar.titleTextAttributes =
+      [ NSForegroundColorAttributeName: UIColor.white ]
+
     tableView.dataSource = self
     tableView.delegate = self
     query = baseQuery()
@@ -225,33 +233,18 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
 }
 
 class RestaurantTableViewCell: UITableViewCell {
-  
+
   @IBOutlet private var thumbnailView: UIImageView!
 
-  @IBOutlet private var nameLabel: UILabel! {
-    didSet {
-      nameLabel.font = UIFont.preferredFont(forTextStyle: .body)
-    }
-  }
-  
+  @IBOutlet private var nameLabel: UILabel!
+
   @IBOutlet var starsView: ImmutableStarsView!
 
-  @IBOutlet private var cityLabel: UILabel! {
-    didSet {
-      cityLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-    }
-  }
-  @IBOutlet private var categoryLabel: UILabel! {
-    didSet {
-      categoryLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-    }
-  }
-  @IBOutlet private var priceLabel: UILabel! {
-    didSet {
-      priceLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-      priceLabel.textColor = UIColor(red: 60 / 255, green: 210 / 255, blue: 64 / 255, alpha: 1)
-    }
-  }
+  @IBOutlet private var cityLabel: UILabel!
+
+  @IBOutlet private var categoryLabel: UILabel!
+
+  @IBOutlet private var priceLabel: UILabel!
 
   func populate(restaurant: Restaurant) {
     nameLabel.text = restaurant.name

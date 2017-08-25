@@ -37,6 +37,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    self.title = restaurant?.name
+    navigationController?.navigationBar.tintColor = UIColor.white
+
     tableView.dataSource = self
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 140
@@ -126,43 +130,33 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
 
 class RestaurantTitleTableViewCell: UITableViewCell {
 
-  @IBOutlet var nameLabel: UILabel! {
+  @IBOutlet var nameLabel: UILabel!
+
+  @IBOutlet var categoryLabel: UILabel!
+
+  @IBOutlet var cityLabel: UILabel!
+
+  @IBOutlet var priceLabel: UILabel!
+
+  @IBOutlet var starsView: ImmutableStarsView! {
     didSet {
-      nameLabel.textColor = .white
-      nameLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+      starsView.highlightedColor = UIColor.white.cgColor
     }
   }
 
-  @IBOutlet var starsView: ImmutableStarsView!
-
-  @IBOutlet var categoryLabel: UILabel! {
-    didSet {
-      categoryLabel.textColor = .white
-      categoryLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-    }
-  }
-  @IBOutlet var cityLabel: UILabel! {
-    didSet {
-      cityLabel.textColor = .white
-      cityLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-    }
-  }
-  @IBOutlet var priceLabel: UILabel! {
-    didSet {
-      priceLabel.textColor = .white
-      priceLabel.font = UIFont.preferredFont(forTextStyle: .body)
-    }
-  }
   @IBOutlet var titleImageView: UIImageView! {
     didSet {
       let gradient = CAGradientLayer()
-      gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
-      gradient.startPoint = CGPoint(x: 0, y: 0)
-      gradient.endPoint = CGPoint(x: 0, y: 1.4)
-      gradient.opacity = 0.42
-      gradient.frame = titleImageView.layer.bounds
+      gradient.colors = [UIColor(red: 0, green: 0, blue: 0, alpha: 0.6).cgColor, UIColor.clear.cgColor]
+      gradient.locations = [0.0, 1.0]
 
-      titleImageView.layer.addSublayer(gradient)
+      gradient.startPoint = CGPoint(x: 0, y: 1)
+      gradient.endPoint = CGPoint(x: 0, y: 0)
+
+      // TODO: This does not cover the whole image
+      gradient.frame = titleImageView.frame
+
+      titleImageView.layer.insertSublayer(gradient, at: 0)
       titleImageView.contentMode = .scaleAspectFill
     }
   }
@@ -239,16 +233,10 @@ class ReviewFormTableViewCell: UITableViewCell, UITextFieldDelegate {
 
 class ReviewTableViewCell: UITableViewCell {
 
-  @IBOutlet var usernameLabel: UILabel! {
-    didSet {
-      usernameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-    }
-  }
-  @IBOutlet var reviewContentsLabel: UILabel! {
-    didSet {
-      reviewContentsLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
-    }
-  }
+  @IBOutlet var usernameLabel: UILabel!
+
+  @IBOutlet var reviewContentsLabel: UILabel!
+
   @IBOutlet var starsView: ImmutableStarsView!
 
   func populate(review: Review) {
