@@ -23,19 +23,22 @@ Here's an adequate set of rules for running FireEats.
 ```
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /restaurants/{any}/ratings/{rating} {
-      // Users can only write ratings with their user ID
-      allow read;
-      allow write: if request.auth.uid == request.resource.userId;
-    }
+    match /restaurants/{restaurant} {
+      match /ratings/{rating} {
+        allow read: if request.auth != null;
+        allow write: if request.auth.uid == request.resource.userId;
+      }
 
-    match /restaurants/{any} {
-      // Only authenticated users can read or write data
-      allow read, write: if request.auth != null;
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null
+                    && request.resource.name == resource.name
+                    && request.resource.city == resource.city
+                    && request.resource.price == resource.price
+                    && request.resource.category == resource.category;
     }
   }
 }
-
 ```
 
 ## Indexes

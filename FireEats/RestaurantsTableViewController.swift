@@ -36,11 +36,11 @@ func priceString(from price: Int) -> String {
   return priceText
 }
 
-private func randomImageURL() -> URL {
-  let randomImageNumber = Int(arc4random_uniform(22)) + 1
-  let randomImageURLString =
-  "https://storage.googleapis.com/firestorequickstarts.appspot.com/food_\(randomImageNumber).png"
-  return URL(string: randomImageURLString)!
+private func imageURL(from string: String) -> URL {
+  let number = (abs(string.hashValue) % 22) + 1
+  let URLString =
+      "https://storage.googleapis.com/firestorequickstarts.appspot.com/food_\(number).png"
+  return URL(string: URLString)!
 }
 
 class RestaurantsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -53,18 +53,47 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
   @IBOutlet var categoryFilterLabel: UILabel!
   @IBOutlet var priceFilterLabel: UILabel!
 
-  var localCollection: LocalCollection<Restaurant>!
+  private var restaurants: [Restaurant] = []
+  private var documents: [DocumentSnapshot] = []
 
-  var query: Query? {
+  fileprivate var query: Query? {
     didSet {
-      guard let query = query else { return }
-      if let collection = localCollection {
-        collection.stopListening()
-      }
-      localCollection = LocalCollection(query: query) { [unowned self] changes in
-        self.tableView.reloadData()
+      if let listener = listener {
+        listener.remove()
+        observeQuery()
       }
     }
+  }
+
+  private var listener: FIRListenerRegistration?
+
+  fileprivate func observeQuery() {
+    guard let query = query else { return }
+    stopObserving()
+
+    // Display data from Firestore, part one
+
+    listener = query.addSnapshotListener { [unowned self] (snapshot, error) in
+      guard let snapshot = snapshot else {
+        print("Error fetching snapshot results: \(error!)")
+        return
+      }
+      let models = snapshot.documents.map { (document) -> Restaurant in
+        if let model = Restaurant(dictionary: document.data()) {
+          return model
+        } else {
+          // Don't use fatalError here in a real app.
+          fatalError("Unable to initialize type \(Restaurant.self) with dictionary \(document.data())")
+        }
+      }
+      self.restaurants = models
+      self.documents = snapshot.documents
+      self.tableView.reloadData()
+    }
+  }
+
+  fileprivate func stopObserving() {
+    listener?.remove()
   }
 
   fileprivate func baseQuery() -> Query {
@@ -87,7 +116,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    localCollection.listen()
+    observeQuery()
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -101,7 +130,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    localCollection.stopListening()
+    stopObserving()
   }
 
   @IBAction func didTapPopulateButton(_ sender: Any) {
@@ -120,6 +149,10 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
       let ratingCount = 0
       let averageRating: Float = 0
 
+      // Basic writes
+
+      let collection = Firestore.firestore().collection("restaurants")
+
       let restaurant = Restaurant(
         name: name,
         category: category,
@@ -129,7 +162,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
         averageRating: averageRating
       )
 
-      Firestore.firestore().collection("restaurants").addDocument(data: restaurant.dictionary)
+      collection.addDocument(data: restaurant.dictionary)
     }
   }
 
@@ -142,18 +175,22 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
     present(filters.navigationController, animated: true, completion: nil)
   }
 
+  deinit {
+    listener?.remove()
+  }
+
   // MARK: - UITableViewDataSource
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantTableViewCell",
                                              for: indexPath) as! RestaurantTableViewCell
-    let restaurant = localCollection[indexPath.row]
+    let restaurant = restaurants[indexPath.row]
     cell.populate(restaurant: restaurant)
     return cell
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return localCollection.count
+    return restaurants.count
   }
 
   // MARK: - UITableViewDelegate
@@ -161,9 +198,9 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     let controller = RestaurantDetailViewController.fromStoryboard()
-    controller.titleImageURL = randomImageURL()
-    controller.restaurant = localCollection[indexPath.row]
-    controller.restaurantReference = localCollection.documents[indexPath.row].reference
+    controller.titleImageURL = imageURL(from: restaurants[indexPath.row].name)
+    controller.restaurant = restaurants[indexPath.row]
+    controller.restaurantReference = documents[indexPath.row].reference
     self.navigationController?.pushViewController(controller, animated: true)
   }
 
@@ -171,16 +208,38 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
 extension RestaurantsTableViewController: FiltersViewControllerDelegate {
 
+  func query(withCategory category: String?, city: String?, price: Int?, sortBy: String?) -> Query {
+    var filtered = baseQuery()
+
+    // Advanced queries
+
+    if let category = category, !category.isEmpty {
+      filtered = filtered.whereField("category", isEqualTo: category)
+    }
+
+    if let city = city, !city.isEmpty {
+      filtered = filtered.whereField("city", isEqualTo: city)
+    }
+
+    if let price = price {
+      filtered = filtered.whereField("price", isEqualTo: price)
+    }
+
+    if let sortBy = sortBy, !sortBy.isEmpty {
+      filtered = filtered.order(by: sortBy)
+    }
+
+    return filtered
+  }
+
   func controller(_ controller: FiltersViewController,
                   didSelectCategory category: String?,
                   city: String?,
                   price: Int?,
                   sortBy: String?) {
-    var filtered = baseQuery()
+    let filtered = query(withCategory: category, city: city, price: price, sortBy: sortBy)
 
     if let category = category, !category.isEmpty {
-      filtered = filtered.whereField("category", isEqualTo: category)
-
       categoryFilterLabel.text = category
       categoryFilterLabel.isHidden = false
     } else {
@@ -188,8 +247,6 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
     }
 
     if let city = city, !city.isEmpty {
-      filtered = filtered.whereField("city", isEqualTo: city)
-
       cityFilterLabel.text = city
       cityFilterLabel.isHidden = false
     } else {
@@ -197,29 +254,14 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
     }
 
     if let price = price {
-      filtered = filtered.whereField("price", isEqualTo: price)
-
       priceFilterLabel.text = priceString(from: price)
       priceFilterLabel.isHidden = false
     } else {
       priceFilterLabel.isHidden = true
     }
 
-    // TODO: refactor this method, so we're not using view state to check filter logic.
-    if categoryFilterLabel.isHidden && priceFilterLabel.isHidden && cityFilterLabel.isHidden {
-      stackViewHeightConstraint.constant = 0
-      activeFiltersStackView.isHidden = true
-    } else {
-      stackViewHeightConstraint.constant = 44
-      activeFiltersStackView.isHidden = false
-    }
-
-    if let sortBy = sortBy, !sortBy.isEmpty {
-      filtered = filtered.order(by: sortBy)
-    }
-
     self.query = filtered
-    localCollection.listen()
+    observeQuery()
   }
 
 }
@@ -254,15 +296,17 @@ class RestaurantTableViewCell: UITableViewCell {
   }
 
   func populate(restaurant: Restaurant) {
+
+    // Displaying data, part two
+
     nameLabel.text = restaurant.name
     cityLabel.text = restaurant.city
     categoryLabel.text = restaurant.category
     starsView.rating = Int(restaurant.averageRating.rounded())
-
-    let imageURL = randomImageURL()
-    thumbnailView.sd_setImage(with: imageURL)
-
     priceLabel.text = priceString(from: restaurant.price)
+
+    let image = imageURL(from: restaurant.name)
+    thumbnailView.sd_setImage(with: image)
   }
 
   override func prepareForReuse() {

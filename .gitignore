@@ -27,4 +27,5 @@ DerivedData
 .DS_Store
 Pods/
 *.xcworkspace/
-samples/**/GoogleService-Info.plist
+FireEats/GoogleService-Info.plist
+
