@@ -43,6 +43,17 @@ class FiltersViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
   }
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    // Red bar with white color
+    navigationController?.navigationBar.barTintColor =
+      UIColor(red: 211/255, green: 47/255, blue: 47/255, alpha: 1.0)
+    navigationController?.navigationBar.isTranslucent = false
+    navigationController?.navigationBar.titleTextAttributes =
+      [ NSForegroundColorAttributeName: UIColor.white ]
+  }
+
   private func price(from string: String) -> Int? {
     switch string {
     case "$":
