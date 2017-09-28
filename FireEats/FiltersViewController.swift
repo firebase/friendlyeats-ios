@@ -30,8 +30,16 @@ class FiltersViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     return (navigationController: navController, filtersController: controller)
   }
 
-  @IBOutlet var categoryTextField: UITextField!
-  @IBOutlet var cityTextField: UITextField!
+  @IBOutlet var categoryTextField: UITextField! {
+    didSet {
+      categoryTextField.inputView = categoryPickerView
+    }
+  }
+  @IBOutlet var cityTextField: UITextField! {
+    didSet {
+      cityTextField.inputView = cityPickerView
+    }
+  }
   @IBOutlet var priceTextField: UITextField! {
     didSet {
       priceTextField.inputView = pricePickerView
@@ -46,9 +54,9 @@ class FiltersViewController: UIViewController, UIPickerViewDataSource, UIPickerV
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    // Red bar with white color
+    // Blue bar with white color
     navigationController?.navigationBar.barTintColor =
-      UIColor(red: 211/255, green: 47/255, blue: 47/255, alpha: 1.0)
+      UIColor(red: 0x3d/0xff, green: 0x5a/0xff, blue: 0xfe/0xff, alpha: 1.0)
     navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.titleTextAttributes =
       [ NSForegroundColorAttributeName: UIColor.white ]
@@ -100,8 +108,24 @@ class FiltersViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     return pickerView
   }()
 
-  private let sortByOptions = ["name", "category", "city", "price"]
+  private lazy var cityPickerView: UIPickerView = {
+    let pickerView = UIPickerView()
+    pickerView.dataSource = self
+    pickerView.delegate = self
+    return pickerView
+  }()
+
+  private lazy var categoryPickerView: UIPickerView = {
+    let pickerView = UIPickerView()
+    pickerView.dataSource = self
+    pickerView.delegate = self
+    return pickerView
+  }()
+
+  private let sortByOptions = ["name", "category", "city", "price", "avgRating"]
   private let priceOptions = ["$", "$$", "$$$"]
+  private let cityOptions = Restaurant.cities
+  private let categoryOptions = Restaurant.categories
 
   // MARK: UIPickerViewDataSource
 
@@ -110,28 +134,52 @@ class FiltersViewController: UIViewController, UIPickerViewDataSource, UIPickerV
   }
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    if pickerView == sortByPickerView {
+    switch pickerView {
+    case sortByPickerView:
       return sortByOptions.count
-    } else {
+    case pricePickerView:
       return priceOptions.count
+    case cityPickerView:
+      return cityOptions.count
+    case categoryPickerView:
+      return categoryOptions.count
+
+    case _:
+      fatalError("Unhandled picker view: \(pickerView)")
     }
   }
 
   // MARK: - UIPickerViewDelegate
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent: Int) -> String? {
-    if pickerView == sortByPickerView {
+    switch pickerView {
+    case sortByPickerView:
       return sortByOptions[row]
-    } else {
+    case pricePickerView:
       return priceOptions[row]
+    case cityPickerView:
+      return cityOptions[row]
+    case categoryPickerView:
+      return categoryOptions[row]
+
+    case _:
+      fatalError("Unhandled picker view: \(pickerView)")
     }
   }
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    if pickerView == sortByPickerView {
+    switch pickerView {
+    case sortByPickerView:
       sortByTextField.text = sortByOptions[row]
-    } else {
+    case pricePickerView:
       priceTextField.text = priceOptions[row]
+    case cityPickerView:
+      cityTextField.text = cityOptions[row]
+    case categoryPickerView:
+      categoryTextField.text = categoryOptions[row]
+
+    case _:
+      fatalError("Unhandled picker view: \(pickerView)")
     }
   }
 

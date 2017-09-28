@@ -118,7 +118,7 @@ class RatingView: UIControl {
 
   private func clamp(_ index: Int) -> Int {
     if index < 0 { return 0 }
-    if index >= 5 { return 4 }
+    if index > 4 { return 4 }
     return index
   }
 
@@ -215,6 +215,7 @@ class RatingView: UIControl {
   
 }
 
+// This class is absolutely not immutable, but it's also not user-interactive.
 class ImmutableStarsView: UIView {
 
   override var intrinsicContentSize: CGSize {
@@ -255,7 +256,7 @@ class ImmutableStarsView: UIView {
 
   /// This is an awful func name. Index must be within 0 ..< 4, or crash.
   private func setHighlighted(index anyIndex: Int) {
-    if anyIndex <= 0 {
+    if anyIndex < 0 {
       clearAll()
       return
     }
