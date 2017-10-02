@@ -36,13 +36,14 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
   @IBOutlet var tableView: UITableView!
   @IBOutlet var titleView: RestaurantTitleView!
 
+  let backgroundView = UIImageView()
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.title = restaurant?.name
     navigationController?.navigationBar.tintColor = UIColor.white
 
-    let backgroundView = UIImageView()
     backgroundView.image = UIImage(named: "pizza-monster")!
     backgroundView.contentScaleFactor = 2
     backgroundView.contentMode = .bottom
@@ -55,7 +56,12 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
 
     let query = restaurantReference!.collection("ratings")
     localCollection = LocalCollection(query: query) { [unowned self] (changes) in
-      if self.localCollection.count == 0 { return }
+      if self.localCollection.count == 0 {
+        self.tableView.backgroundView = self.backgroundView
+        return
+      } else {
+        self.tableView.backgroundView = nil
+      }
       var indexPaths: [IndexPath] = []
 
       // Only care about additions in this block, updating existing reviews probably not important
@@ -65,6 +71,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         let indexPath = IndexPath(row: index, section: 0)
         indexPaths.append(indexPath)
       }
+
       self.tableView.insertRows(at: indexPaths, with: .automatic)
     }
   }
