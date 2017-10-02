@@ -1,42 +1,42 @@
 PODS:
-  - BoringSSL (8.2):
-    - BoringSSL/Implementation (= 8.2)
-    - BoringSSL/Interface (= 8.2)
-  - BoringSSL/Implementation (8.2):
-    - BoringSSL/Interface (= 8.2)
-  - BoringSSL/Interface (8.2)
-  - Firebase/Auth (4.0.4):
+  - BoringSSL (9.0):
+    - BoringSSL/Implementation (= 9.0)
+    - BoringSSL/Interface (= 9.0)
+  - BoringSSL/Implementation (9.0):
+    - BoringSSL/Interface (= 9.0)
+  - BoringSSL/Interface (9.0)
+  - Firebase/Auth (4.2.0):
     - Firebase/Core
-    - FirebaseAuth (= 4.0.0)
-  - Firebase/Core (4.0.4):
-    - FirebaseAnalytics (= 4.0.2)
-    - FirebaseCore (= 4.0.4)
-  - FirebaseAnalytics (4.0.2):
+    - FirebaseAuth (= 4.2.0)
+  - Firebase/Core (4.2.0):
+    - FirebaseAnalytics (= 4.0.3)
+    - FirebaseCore (= 4.0.7)
+  - FirebaseAnalytics (4.0.3):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseAuth (4.0.0):
+    - nanopb (~> 0.3)
+  - FirebaseAuth (4.2.0):
     - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.4):
+  - FirebaseCore (4.0.7):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseInstanceID (2.0.0):
-    - FirebaseCore (~> 4.0)
-  - FirebaseUI/Auth (4.1.1):
-    - Firebase/Auth
-  - FirebaseUI/Google (4.1.1):
+  - FirebaseInstanceID (2.0.3)
+  - FirebaseUI/Auth (4.2.0):
+    - Firebase/Auth (~> 4.0)
+  - FirebaseUI/Google (4.2.0):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - Firestore (0.6.3):
+  - Firestore (0.7.0):
     - FirebaseAnalytics (~> 4.0)
-    - FirebaseAuth (~> 4.0)
+    - FirebaseAuth (~> 4.1)
     - FirebaseCore (~> 4.0)
     - gRPC-ProtoRPC (~> 1.0)
     - leveldb-library (~> 1.18)
     - Protobuf (~> 3.1)
-  - GoogleSignIn (4.0.2):
+  - GoogleSignIn (4.1.0):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
     - GTMOAuth2 (~> 1.0)
@@ -51,23 +51,23 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - gRPC (1.4.2):
-    - gRPC-Core (= 1.4.2)
-    - gRPC-RxLibrary (= 1.4.2)
-  - gRPC-Core (1.4.2):
-    - gRPC-Core/Implementation (= 1.4.2)
-    - gRPC-Core/Interface (= 1.4.2)
-  - gRPC-Core/Implementation (1.4.2):
-    - BoringSSL (~> 8.0)
-    - gRPC-Core/Interface (= 1.4.2)
+  - gRPC (1.6.0):
+    - gRPC-Core (= 1.6.0)
+    - gRPC-RxLibrary (= 1.6.0)
+  - gRPC-Core (1.6.0):
+    - gRPC-Core/Implementation (= 1.6.0)
+    - gRPC-Core/Interface (= 1.6.0)
+  - gRPC-Core/Implementation (1.6.0):
+    - BoringSSL (~> 9.0)
+    - gRPC-Core/Interface (= 1.6.0)
     - nanopb (~> 0.3)
-  - gRPC-Core/Interface (1.4.2)
-  - gRPC-ProtoRPC (1.4.2):
-    - gRPC (= 1.4.2)
-    - gRPC-RxLibrary (= 1.4.2)
+  - gRPC-Core/Interface (1.6.0)
+  - gRPC-ProtoRPC (1.6.0):
+    - gRPC (= 1.6.0)
+    - gRPC-RxLibrary (= 1.6.0)
     - Protobuf (~> 3.0)
-  - gRPC-RxLibrary (1.4.2)
-  - GTMOAuth2 (1.1.4):
+  - gRPC-RxLibrary (1.6.0)
+  - GTMOAuth2 (1.1.5):
     - GTMSessionFetcher (~> 1.1)
   - GTMSessionFetcher (1.1.11):
     - GTMSessionFetcher/Full (= 1.1.11)
@@ -80,43 +80,43 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - Protobuf (3.3.0)
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
+  - Protobuf (3.4.0)
+  - SDWebImage (4.1.0):
+    - SDWebImage/Core (= 4.1.0)
+  - SDWebImage/Core (4.1.0)
 
 DEPENDENCIES:
   - FirebaseUI/Auth
   - FirebaseUI/Google
-  - Firestore (from `https://storage.googleapis.com/firebase-preview-drop/ios/firestore/0.6.3/Firestore.podspec.json`)
+  - Firestore (from `https://storage.googleapis.com/firebase-preview-drop/ios/firestore/0.7.0/Firestore.podspec.json`)
   - SDWebImage
 
 EXTERNAL SOURCES:
   Firestore:
-    :podspec: https://storage.googleapis.com/firebase-preview-drop/ios/firestore/0.6.3/Firestore.podspec.json
+    :podspec: https://storage.googleapis.com/firebase-preview-drop/ios/firestore/0.7.0/Firestore.podspec.json
 
 SPEC CHECKSUMS:
-  BoringSSL: 4135ae556ee2b82ee85477c39ba917a3dd5424ba
-  Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
-  FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
-  FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
-  FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
-  FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
-  FirebaseUI: 5ebebe2c096c71f20abd1d43d0388958373bdaa0
-  Firestore: f86d082fff3249bc34381e6ceeb41ef97750fd0c
-  GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
+  BoringSSL: 19083b821ef3ae0f758fae15482e183003b1e265
+  Firebase: 9548cae14d69718add12d75a5b312893f7ef89c7
+  FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
+  FirebaseAuth: 22f8a5170f31d1f111141950590f071f35df3229
+  FirebaseCore: 9a6cc1e3eaf75905390f9220596ad4fd8f92faee
+  FirebaseInstanceID: a4fc702b5a026f7322964376047f1a3f1f7cc6ff
+  FirebaseUI: 76877afa8aa122ea135aa51a10fc7d622a82d096
+  Firestore: 80f352a0b5260500b11d7e4626b81a19d4eba312
+  GoogleSignIn: 8c599fc10d25b2af86a3f82fd9631e863f2b1400
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  gRPC: 74b57d3c8a9366e09493828e0a1d27f6d69a79fd
-  gRPC-Core: 642d29e59e5490374622b0629c2dd1c4c111775c
-  gRPC-ProtoRPC: 675ef3d484c06967ed2a5f5ee0e510a3756f755e
-  gRPC-RxLibrary: 7a25c5c25282669a82d1783d7e8a036f53e8ef27
-  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
+  gRPC: 07788969b862af21491908f82b83d17ac08c94cd
+  gRPC-Core: f707ade59c559fe718e27713189607d03b15f571
+  gRPC-ProtoRPC: de7505e493a9d1b6b96c8ea8f976c73100fdf53f
+  gRPC-RxLibrary: 17b9699beb0a838b95b57832244f9ead18e66777
+  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
-  nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
-  Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
+  SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
 
-PODFILE CHECKSUM: af649d8f2c831d0e0cc826d3bb55529355c6af7e
+PODFILE CHECKSUM: a58317d91729fa10807d7e2280f5048cd2dfa839
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1

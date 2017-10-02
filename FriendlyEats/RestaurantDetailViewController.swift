@@ -20,7 +20,7 @@ import Firestore
 import Firebase
 import FirebaseAuthUI
 
-class RestaurantDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReviewFormTableViewCellDelegate {
+class RestaurantDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewReviewViewControllerDelegate {
 
   var titleImageURL: URL?
   var restaurant: Restaurant?
@@ -34,9 +34,21 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
   }
 
   @IBOutlet var tableView: UITableView!
+  @IBOutlet var titleView: RestaurantTitleView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    self.title = restaurant?.name
+    navigationController?.navigationBar.tintColor = UIColor.white
+
+    let backgroundView = UIImageView()
+    backgroundView.image = UIImage(named: "pizza-monster")!
+    backgroundView.contentScaleFactor = 2
+    backgroundView.contentMode = .bottom
+    tableView.backgroundView = backgroundView
+    tableView.tableFooterView = UIView()
+
     tableView.dataSource = self
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 140
@@ -50,57 +62,61 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
       // as there's no way to edit reviews.
       for addition in changes.filter({ $0.type == .added }) {
         let index = self.localCollection.index(of: addition.document)!
-        let indexPath = IndexPath(row: index + 2, section: 0)
+        let indexPath = IndexPath(row: index, section: 0)
         indexPaths.append(indexPath)
       }
       self.tableView.insertRows(at: indexPaths, with: .automatic)
     }
   }
 
+  deinit {
+    localCollection.stopListening()
+  }
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     localCollection.listen()
+    titleView.populate(restaurant: restaurant!)
+    if let url = titleImageURL {
+      titleView.populateImage(url: url)
+    }
   }
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    localCollection.stopListening()
+  }
+
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    set {}
+    get {
+      return .lightContent
+    }
+  }
+
+  @IBAction func didTapAddButton(_ sender: Any) {
+    let controller = NewReviewViewController.fromStoryboard()
+    controller.delegate = self
+    self.navigationController?.pushViewController(controller, animated: true)
   }
 
   // MARK: - UITableViewDataSource
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2 + localCollection.count
+    return localCollection.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    switch indexPath.row {
-    case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantTitleTableViewCell",
-                                               for: indexPath) as! RestaurantTitleTableViewCell
-      if let url = titleImageURL {
-        cell.populateImage(url: url)
-      }
-      cell.populate(restaurant: restaurant!)
-      return cell
-    case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewFormTableViewCell",
-                                               for: indexPath) as! ReviewFormTableViewCell
-      cell.delegate = self
-      return cell
-    case _:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell",
-                                               for: indexPath) as! ReviewTableViewCell
-      let review = localCollection[indexPath.row - 2]
-      cell.populate(review: review)
-      return cell
-    }
+    let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell",
+                                             for: indexPath) as! ReviewTableViewCell
+    let review = localCollection[indexPath.row]
+    cell.populate(review: review)
+    return cell
   }
 
   // MARK: - ReviewFormTableViewCellDelegate
 
-  func reviewFormCell(_ cell: ReviewFormTableViewCell, didSubmitFormWithReview review: Review) {
+  func reviewController(_ controller: NewReviewViewController, didSubmitFormWithReview review: Review) {
     guard let reference = restaurantReference else { return }
     let reviewsCollection = reference.collection("ratings")
     let newReviewReference = reviewsCollection.document()
@@ -122,7 +138,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
 
       // Error if the restaurant data in Firestore has somehow changed or is malformed.
       guard let restaurant = Restaurant(dictionary: restaurantSnapshot.data()) else {
-        let error = NSError(domain: "FireEatsErrorDomain", code: 0, userInfo: [
+        let error = NSError(domain: "FriendlyEatsErrorDomain", code: 0, userInfo: [
           NSLocalizedDescriptionKey: "Unable to write to restaurant at Firestore path: \(reference.path)"
           ])
         errorPointer?.pointee = error
@@ -143,6 +159,11 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     }) { (object, error) in
       if let error = error {
         print(error)
+      } else {
+        // Pop the review controller on success
+        if self.navigationController?.topViewController?.isKind(of: NewReviewViewController.self) ?? false {
+          self.navigationController?.popViewController(animated: true)
+        }
       }
     }
 
@@ -150,49 +171,38 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
 
 }
 
-class RestaurantTitleTableViewCell: UITableViewCell {
+class RestaurantTitleView: UIView {
 
-  @IBOutlet var nameLabel: UILabel! {
+  @IBOutlet var nameLabel: UILabel!
+
+  @IBOutlet var categoryLabel: UILabel!
+
+  @IBOutlet var cityLabel: UILabel!
+
+  @IBOutlet var priceLabel: UILabel!
+
+  @IBOutlet var starsView: ImmutableStarsView! {
     didSet {
-      nameLabel.textColor = .white
-      nameLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+      starsView.highlightedColor = UIColor.white.cgColor
     }
   }
 
-  @IBOutlet var starsView: ImmutableStarsView!
-
-  @IBOutlet var categoryLabel: UILabel! {
-    didSet {
-      categoryLabel.textColor = .white
-      categoryLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-    }
-  }
-  @IBOutlet var cityLabel: UILabel! {
-    didSet {
-      cityLabel.textColor = .white
-      cityLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-    }
-  }
-  @IBOutlet var priceLabel: UILabel! {
-    didSet {
-      priceLabel.textColor = .white
-      priceLabel.font = UIFont.preferredFont(forTextStyle: .body)
-    }
-  }
   @IBOutlet var titleImageView: UIImageView! {
     didSet {
       let gradient = CAGradientLayer()
-      gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
-      gradient.startPoint = CGPoint(x: 0, y: 0)
-      gradient.endPoint = CGPoint(x: 0, y: 1.4)
-      gradient.opacity = 0.42
+      gradient.colors = [UIColor(red: 0, green: 0, blue: 0, alpha: 0.6).cgColor, UIColor.clear.cgColor]
+      gradient.locations = [0.0, 1.0]
+
+      gradient.startPoint = CGPoint(x: 0, y: 1)
+      gradient.endPoint = CGPoint(x: 0, y: 0)
       gradient.frame = CGRect(x: 0,
                               y: 0,
                               width: UIScreen.main.bounds.width,
                               height: titleImageView.bounds.height)
 
-      titleImageView.layer.addSublayer(gradient)
+      titleImageView.layer.insertSublayer(gradient, at: 0)
       titleImageView.contentMode = .scaleAspectFill
+      titleImageView.clipsToBounds = true
     }
   }
 
@@ -210,74 +220,12 @@ class RestaurantTitleTableViewCell: UITableViewCell {
 
 }
 
-protocol ReviewFormTableViewCellDelegate: NSObjectProtocol {
-  func reviewFormCell(_ cell: ReviewFormTableViewCell, didSubmitFormWithReview review: Review)
-}
-
-class ReviewFormTableViewCell: UITableViewCell, UITextFieldDelegate {
-
-  weak var delegate: ReviewFormTableViewCellDelegate?
-
-  @IBOutlet var textField: UITextField! {
-    didSet {
-      textField.addTarget(self, action: #selector(textFieldTextDidChange(_:)), for: .editingChanged)
-    }
-  }
-  @IBOutlet var ratingView: RatingView! {
-    didSet {
-      ratingView.addTarget(self, action: #selector(ratingDidChange(_:)), for: .valueChanged)
-    }
-  }
-  @IBOutlet var submitButton: UIButton! {
-    didSet {
-      submitButton.isEnabled = false
-    }
-  }
-
-  @objc func ratingDidChange(_ sender: Any) {
-    updateSubmitButton()
-  }
-
-  func textFieldIsEmpty() -> Bool {
-    guard let text = textField.text else { return true }
-    return text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-  }
-
-  func updateSubmitButton() {
-    submitButton.isEnabled = (ratingView.rating != nil && !textFieldIsEmpty())
-  }
-
-  @IBAction func didTapSubmitButton(_ sender: Any) {
-    let review = Review(rating: ratingView.rating!,
-                        userID: Auth.auth().currentUser!.uid,
-                        username: Auth.auth().currentUser?.displayName ?? "Anonymous",
-                        text: textField.text!, date: Date())
-    delegate?.reviewFormCell(self, didSubmitFormWithReview: review)
-  }
-
-  @objc func textFieldTextDidChange(_ sender: Any) {
-    updateSubmitButton()
-  }
-
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    delegate = nil
-  }
-
-}
-
 class ReviewTableViewCell: UITableViewCell {
 
-  @IBOutlet var usernameLabel: UILabel! {
-    didSet {
-      usernameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-    }
-  }
-  @IBOutlet var reviewContentsLabel: UILabel! {
-    didSet {
-      reviewContentsLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
-    }
-  }
+  @IBOutlet var usernameLabel: UILabel!
+
+  @IBOutlet var reviewContentsLabel: UILabel!
+
   @IBOutlet var starsView: ImmutableStarsView!
 
   func populate(review: Review) {

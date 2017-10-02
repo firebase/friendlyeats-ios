@@ -30,7 +30,7 @@ func priceString(from price: Int) -> String {
   case 3:
     priceText = "$$$"
   case _:
-    priceText = ""
+    fatalError("price must be between one and three")
   }
 
   return priceText
@@ -52,6 +52,8 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
   @IBOutlet var cityFilterLabel: UILabel!
   @IBOutlet var categoryFilterLabel: UILabel!
   @IBOutlet var priceFilterLabel: UILabel!
+
+  let backgroundView = UIImageView()
 
   private var restaurants: [Restaurant] = []
   private var documents: [DocumentSnapshot] = []
@@ -107,15 +109,31 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.image = UIImage(named: "pizza-monster")!
+    backgroundView.contentMode = .scaleAspectFit
+    backgroundView.alpha = 0.5
+    tableView.backgroundView = backgroundView
+    tableView.tableFooterView = UIView()
+
+    // Blue bar with white color
+    navigationController?.navigationBar.barTintColor =
+      UIColor(red: 0x3d/0xff, green: 0x5a/0xff, blue: 0xfe/0xff, alpha: 1.0)
+    navigationController?.navigationBar.isTranslucent = false
+    navigationController?.navigationBar.titleTextAttributes =
+      [ NSForegroundColorAttributeName: UIColor.white ]
+
     tableView.dataSource = self
     tableView.delegate = self
     query = baseQuery()
     stackViewHeightConstraint.constant = 0
     activeFiltersStackView.isHidden = true
+
+    self.navigationController?.navigationBar.barStyle = .black
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    self.setNeedsStatusBarAppearanceUpdate()
     observeQuery()
   }
 
@@ -135,9 +153,9 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
   @IBAction func didTapPopulateButton(_ sender: Any) {
     let words = ["Bar", "Fire", "Grill", "Drive Thru", "Place", "Best", "Spot", "Prime", "Eatin'"]
-    let cities = ["San Francisco", "Mountain View", "Palo Alto", "Redwood City", "San Mateo",
-                  "Cupertino", "San Jose", "Daly City", "Millbrae", "Belmont"]
-    let categories = ["Pizza", "Burgers", "American", "Dim Sum", "Pho", "Mexican", "Hot Pot"]
+
+    let cities = Restaurant.cities
+    let categories = Restaurant.categories
 
     for _ in 0 ..< 20 {
       let randomIndexes = (Int(arc4random_uniform(UInt32(words.count))),
@@ -146,8 +164,6 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
       let category = categories[Int(arc4random_uniform(UInt32(categories.count)))]
       let city = cities[Int(arc4random_uniform(UInt32(cities.count)))]
       let price = Int(arc4random_uniform(3)) + 1
-      let ratingCount = 0
-      let averageRating: Float = 0
 
       // Basic writes
 
@@ -158,11 +174,32 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
         category: category,
         city: city,
         price: price,
-        ratingCount: ratingCount,
-        averageRating: averageRating
+        ratingCount: 10,
+        averageRating: 0
       )
 
-      collection.addDocument(data: restaurant.dictionary)
+      let restaurantRef = collection.addDocument(data: restaurant.dictionary)
+
+      let batch = Firestore.firestore().batch()
+      guard let user = Auth.auth().currentUser else { continue }
+      var average: Float = 0
+      for _ in 0 ..< 10 {
+        let rating = Int(arc4random_uniform(5) + 1)
+        average += Float(rating) / 10
+        let text = rating > 3 ? "good" : "food was too spicy"
+        let review = Review(rating: rating,
+                            userID: user.uid,
+                            username: user.displayName ?? "Anonymous",
+                            text: text,
+                            date: Date())
+        let ratingRef = restaurantRef.collection("ratings").document()
+        batch.setData(review.dictionary, forDocument: ratingRef)
+      }
+      batch.updateData(["avgRating": average], forDocument: restaurantRef)
+      batch.commit(completion: { (error) in
+        guard let error = error else { return }
+        print("Error generating reviews: \(error). Check your Firestore permissions.")
+      })
     }
   }
 
@@ -173,6 +210,13 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
   @IBAction func didTapFilterButton(_ sender: Any) {
     present(filters.navigationController, animated: true, completion: nil)
+  }
+
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    set {}
+    get {
+      return .lightContent
+    }
   }
 
   deinit {
@@ -210,6 +254,14 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
 
   func query(withCategory category: String?, city: String?, price: Int?, sortBy: String?) -> Query {
     var filtered = baseQuery()
+
+    if category == nil && city == nil && price == nil && sortBy == nil {
+      stackViewHeightConstraint.constant = 0
+      activeFiltersStackView.isHidden = true
+    } else {
+      stackViewHeightConstraint.constant = 44
+      activeFiltersStackView.isHidden = false
+    }
 
     // Advanced queries
 
@@ -267,33 +319,18 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
 }
 
 class RestaurantTableViewCell: UITableViewCell {
-  
+
   @IBOutlet private var thumbnailView: UIImageView!
 
-  @IBOutlet private var nameLabel: UILabel! {
-    didSet {
-      nameLabel.font = UIFont.preferredFont(forTextStyle: .body)
-    }
-  }
-  
+  @IBOutlet private var nameLabel: UILabel!
+
   @IBOutlet var starsView: ImmutableStarsView!
 
-  @IBOutlet private var cityLabel: UILabel! {
-    didSet {
-      cityLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-    }
-  }
-  @IBOutlet private var categoryLabel: UILabel! {
-    didSet {
-      categoryLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-    }
-  }
-  @IBOutlet private var priceLabel: UILabel! {
-    didSet {
-      priceLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-      priceLabel.textColor = UIColor(red: 60 / 255, green: 210 / 255, blue: 64 / 255, alpha: 1)
-    }
-  }
+  @IBOutlet private var cityLabel: UILabel!
+
+  @IBOutlet private var categoryLabel: UILabel!
+
+  @IBOutlet private var priceLabel: UILabel!
 
   func populate(restaurant: Restaurant) {
 

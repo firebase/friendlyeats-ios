@@ -18,6 +18,8 @@ import UIKit
 
 class RatingView: UIControl {
 
+  var highlightedColor: CGColor = Constants.highlightedColorOrange
+
   var rating: Int? {
     didSet {
       if let value = rating {
@@ -92,15 +94,15 @@ class RatingView: UIControl {
     // Highlight everything up to and including the star at the index.
     (0 ... index).forEach {
       let star = starLayers[$0]
-      star.strokeColor = Constants.highlightedColor
-      star.fillColor = Constants.highlightedColor
+      star.strokeColor = highlightedColor
+      star.fillColor = highlightedColor
     }
 
     // Unhighlight everything after the index, if applicable.
     guard index < 4 else { return }
     ((index + 1) ..< 5).forEach {
       let star = starLayers[$0]
-      star.strokeColor = Constants.unhighlightedColor
+      star.strokeColor = highlightedColor
       star.fillColor = nil
     }
   }
@@ -109,14 +111,14 @@ class RatingView: UIControl {
   private func clearAll() {
     (0 ..< 5).forEach {
       let star = starLayers[$0]
-      star.strokeColor = Constants.unhighlightedColor
+      star.strokeColor = highlightedColor
       star.fillColor = nil
     }
   }
 
   private func clamp(_ index: Int) -> Int {
     if index < 0 { return 0 }
-    if index >= 5 { return 4 }
+    if index > 4 { return 4 }
     return index
   }
 
@@ -173,7 +175,7 @@ class RatingView: UIControl {
 
   private enum Constants {
     static let unhighlightedColor = UIColor.gray.cgColor
-    static let highlightedColor = UIColor(red: 250 / 255, green: 230 / 255, blue: 128 / 255, alpha: 1).cgColor
+    static let highlightedColorOrange = UIColor(red: 255 / 255, green: 179 / 255, blue: 0 / 255, alpha: 1).cgColor
   }
 
   // MARK: Rating View Accessibility
@@ -213,12 +215,15 @@ class RatingView: UIControl {
   
 }
 
+// This class is absolutely not immutable, but it's also not user-interactive.
 class ImmutableStarsView: UIView {
 
   override var intrinsicContentSize: CGSize {
     get { return CGSize(width: 100, height: 20) }
     set {}
   }
+
+  var highlightedColor: CGColor = Constants.highlightedColorOrange
 
   var rating: Int? {
     didSet {
@@ -251,7 +256,7 @@ class ImmutableStarsView: UIView {
 
   /// This is an awful func name. Index must be within 0 ..< 4, or crash.
   private func setHighlighted(index anyIndex: Int) {
-    if anyIndex <= 0 {
+    if anyIndex < 0 {
       clearAll()
       return
     }
@@ -259,8 +264,8 @@ class ImmutableStarsView: UIView {
     // Highlight everything up to and including the star at the index.
     (0 ... index).forEach {
       let star = starLayers[$0]
-      star.strokeColor = Constants.highlightedColor
-      star.fillColor = Constants.highlightedColor
+      star.strokeColor = highlightedColor
+      star.fillColor = highlightedColor
     }
 
     // Unhighlight everything after the index, if applicable.
@@ -336,7 +341,7 @@ class ImmutableStarsView: UIView {
 
   private enum Constants {
     static let unhighlightedColor = UIColor.gray.cgColor
-    static let highlightedColor = UIColor(red: 250 / 255, green: 230 / 255, blue: 128 / 255, alpha: 1).cgColor
+    static let highlightedColorOrange = UIColor(red: 255 / 255, green: 179 / 255, blue: 0 / 255, alpha: 1).cgColor
   }
 
 }
