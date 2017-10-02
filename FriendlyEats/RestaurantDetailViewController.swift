@@ -121,7 +121,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     return cell
   }
 
-  // MARK: - ReviewFormTableViewCellDelegate
+  // MARK: - NewReviewViewControllerDelegate
 
   func reviewController(_ controller: NewReviewViewController, didSubmitFormWithReview review: Review) {
     guard let reference = restaurantReference else { return }
