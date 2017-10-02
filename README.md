@@ -1,6 +1,6 @@
-# Fire Eats
+# Friendly Eats
 ## Introduction
-Fire Eats is a restaurant recommendation app built on Cloud Firestore.
+Friendly Eats is a restaurant recommendation app built on Cloud Firestore.
 For more information about Firestore visit [the docs][firestore-docs].
 ## Setup
   * [Set up your iOS app for Cloud Firestore][setup-ios]

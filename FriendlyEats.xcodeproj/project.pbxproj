@@ -14,7 +14,7 @@
 		8D9BBC361EE2200900194E9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9BBC341EE2200900194E9A /* Main.storyboard */; };
 		8D9BBC381EE2200900194E9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D9BBC371EE2200900194E9A /* Assets.xcassets */; };
 		8D9BBC3B1EE2200900194E9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9BBC391EE2200900194E9A /* LaunchScreen.storyboard */; };
-		8D9BBC461EE2200900194E9A /* FireEatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BBC451EE2200900194E9A /* FireEatsTests.swift */; };
+		8D9BBC461EE2200900194E9A /* FriendlyEatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BBC451EE2200900194E9A /* FriendlyEatsTests.swift */; };
 		8DD9ACDA1F7B166900C2DD24 /* pizza-monster.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD9ACD91F7B166900C2DD24 /* pizza-monster.png */; };
 		8DF1E3111EE5CFBC00192CDE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DF1E3101EE5CFBC00192CDE /* GoogleService-Info.plist */; };
 		8DF1E3131EE5CFF900192CDE /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF1E3121EE5CFF900192CDE /* Restaurant.swift */; };
@@ -29,22 +29,22 @@
 			containerPortal = 8D9BBC251EE2200800194E9A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8D9BBC2C1EE2200900194E9A;
-			remoteInfo = FireEats;
+			remoteInfo = FriendlyEats;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8D004D2C1EE879B5004DEF35 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		8D5DF7011F7EF3BA00B0D24F /* NewReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
-		8D9BBC2D1EE2200900194E9A /* FireEats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireEats.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D9BBC2D1EE2200900194E9A /* FriendlyEats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendlyEats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9BBC301EE2200900194E9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D9BBC321EE2200900194E9A /* RestaurantsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsTableViewController.swift; sourceTree = "<group>"; };
 		8D9BBC351EE2200900194E9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D9BBC371EE2200900194E9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D9BBC3A1EE2200900194E9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D9BBC3C1EE2200900194E9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D9BBC411EE2200900194E9A /* FireEatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FireEatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D9BBC451EE2200900194E9A /* FireEatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireEatsTests.swift; sourceTree = "<group>"; };
+		8D9BBC411EE2200900194E9A /* FriendlyEatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FriendlyEatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D9BBC451EE2200900194E9A /* FriendlyEatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyEatsTests.swift; sourceTree = "<group>"; };
 		8D9BBC471EE2200900194E9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DD9ACD91F7B166900C2DD24 /* pizza-monster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pizza-monster.png"; sourceTree = "<group>"; };
 		8DF1E3101EE5CFBC00192CDE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -75,8 +75,8 @@
 		8D9BBC241EE2200800194E9A = {
 			isa = PBXGroup;
 			children = (
-				8D9BBC2F1EE2200900194E9A /* FireEats */,
-				8D9BBC441EE2200900194E9A /* FireEatsTests */,
+				8D9BBC2F1EE2200900194E9A /* FriendlyEats */,
+				8D9BBC441EE2200900194E9A /* FriendlyEatsTests */,
 				8D9BBC2E1EE2200900194E9A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,13 +84,13 @@
 		8D9BBC2E1EE2200900194E9A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D9BBC2D1EE2200900194E9A /* FireEats.app */,
-				8D9BBC411EE2200900194E9A /* FireEatsTests.xctest */,
+				8D9BBC2D1EE2200900194E9A /* FriendlyEats.app */,
+				8D9BBC411EE2200900194E9A /* FriendlyEatsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8D9BBC2F1EE2200900194E9A /* FireEats */ = {
+		8D9BBC2F1EE2200900194E9A /* FriendlyEats */ = {
 			isa = PBXGroup;
 			children = (
 				8DF1E3101EE5CFBC00192CDE /* GoogleService-Info.plist */,
@@ -108,24 +108,26 @@
 				8D9BBC391EE2200900194E9A /* LaunchScreen.storyboard */,
 				8D9BBC3C1EE2200900194E9A /* Info.plist */,
 			);
-			path = FireEats;
+			name = FriendlyEats;
+			path = FriendlyEats;
 			sourceTree = "<group>";
 		};
-		8D9BBC441EE2200900194E9A /* FireEatsTests */ = {
+		8D9BBC441EE2200900194E9A /* FriendlyEatsTests */ = {
 			isa = PBXGroup;
 			children = (
-				8D9BBC451EE2200900194E9A /* FireEatsTests.swift */,
+				8D9BBC451EE2200900194E9A /* FriendlyEatsTests.swift */,
 				8D9BBC471EE2200900194E9A /* Info.plist */,
 			);
-			path = FireEatsTests;
+			name = FriendlyEatsTests;
+			path = FriendlyEatsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D9BBC2C1EE2200900194E9A /* FireEats */ = {
+		8D9BBC2C1EE2200900194E9A /* FriendlyEats */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8D9BBC4A1EE2200900194E9A /* Build configuration list for PBXNativeTarget "FireEats" */;
+			buildConfigurationList = 8D9BBC4A1EE2200900194E9A /* Build configuration list for PBXNativeTarget "FriendlyEats" */;
 			buildPhases = (
 				8D9BBC291EE2200900194E9A /* Sources */,
 				8D9BBC2A1EE2200900194E9A /* Frameworks */,
@@ -135,14 +137,14 @@
 			);
 			dependencies = (
 			);
-			name = FireEats;
-			productName = FireEats;
-			productReference = 8D9BBC2D1EE2200900194E9A /* FireEats.app */;
+			name = FriendlyEats;
+			productName = FriendlyEats;
+			productReference = 8D9BBC2D1EE2200900194E9A /* FriendlyEats.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8D9BBC401EE2200900194E9A /* FireEatsTests */ = {
+		8D9BBC401EE2200900194E9A /* FriendlyEatsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8D9BBC4D1EE2200900194E9A /* Build configuration list for PBXNativeTarget "FireEatsTests" */;
+			buildConfigurationList = 8D9BBC4D1EE2200900194E9A /* Build configuration list for PBXNativeTarget "FriendlyEatsTests" */;
 			buildPhases = (
 				8D9BBC3D1EE2200900194E9A /* Sources */,
 				8D9BBC3E1EE2200900194E9A /* Frameworks */,
@@ -153,9 +155,9 @@
 			dependencies = (
 				8D9BBC431EE2200900194E9A /* PBXTargetDependency */,
 			);
-			name = FireEatsTests;
-			productName = FireEatsTests;
-			productReference = 8D9BBC411EE2200900194E9A /* FireEatsTests.xctest */;
+			name = FriendlyEatsTests;
+			productName = FriendlyEatsTests;
+			productReference = 8D9BBC411EE2200900194E9A /* FriendlyEatsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -179,7 +181,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8D9BBC281EE2200800194E9A /* Build configuration list for PBXProject "FireEats" */;
+			buildConfigurationList = 8D9BBC281EE2200800194E9A /* Build configuration list for PBXProject "FriendlyEats" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -192,8 +194,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D9BBC2C1EE2200900194E9A /* FireEats */,
-				8D9BBC401EE2200900194E9A /* FireEatsTests */,
+				8D9BBC2C1EE2200900194E9A /* FriendlyEats */,
+				8D9BBC401EE2200900194E9A /* FriendlyEatsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -240,7 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D9BBC461EE2200900194E9A /* FireEatsTests.swift in Sources */,
+				8D9BBC461EE2200900194E9A /* FriendlyEatsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +251,7 @@
 /* Begin PBXTargetDependency section */
 		8D9BBC431EE2200900194E9A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8D9BBC2C1EE2200900194E9A /* FireEats */;
+			target = 8D9BBC2C1EE2200900194E9A /* FriendlyEats */;
 			targetProxy = 8D9BBC421EE2200900194E9A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -373,9 +375,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = FireEats/Info.plist;
+				INFOPLIST_FILE = FriendlyEats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FireEats;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FriendlyEats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -385,9 +387,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = FireEats/Info.plist;
+				INFOPLIST_FILE = FriendlyEats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FireEats;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FriendlyEats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -398,12 +400,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = FireEatsTests/Info.plist;
+				INFOPLIST_FILE = FriendlyEatsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FireEatsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FriendlyEatsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FireEats.app/FireEats";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FriendlyEats.app/FriendlyEats";
 			};
 			name = Debug;
 		};
@@ -412,19 +414,19 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = FireEatsTests/Info.plist;
+				INFOPLIST_FILE = FriendlyEatsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FireEatsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FriendlyEatsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FireEats.app/FireEats";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FriendlyEats.app/FriendlyEats";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8D9BBC281EE2200800194E9A /* Build configuration list for PBXProject "FireEats" */ = {
+		8D9BBC281EE2200800194E9A /* Build configuration list for PBXProject "FriendlyEats" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D9BBC481EE2200900194E9A /* Debug */,
@@ -433,7 +435,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8D9BBC4A1EE2200900194E9A /* Build configuration list for PBXNativeTarget "FireEats" */ = {
+		8D9BBC4A1EE2200900194E9A /* Build configuration list for PBXNativeTarget "FriendlyEats" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D9BBC4B1EE2200900194E9A /* Debug */,
@@ -442,7 +444,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8D9BBC4D1EE2200900194E9A /* Build configuration list for PBXNativeTarget "FireEatsTests" */ = {
+		8D9BBC4D1EE2200900194E9A /* Build configuration list for PBXNativeTarget "FriendlyEatsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D9BBC4E1EE2200900194E9A /* Debug */,

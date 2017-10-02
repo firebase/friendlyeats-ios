@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Fire Eats-->
+        <!--Friendly Eats-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="RestaurantsTableViewController" customModule="FireEats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="RestaurantsTableViewController" customModule="FriendlyEats" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantTableViewCell" id="x1u-Lj-wgb" customClass="RestaurantTableViewCell" customModule="FireEats" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantTableViewCell" id="x1u-Lj-wgb" customClass="RestaurantTableViewCell" customModule="FriendlyEats" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x1u-Lj-wgb" id="r68-G7-Z5a">
@@ -52,7 +52,7 @@
                                                     <color key="textColor" white="0.0" alpha="0.38" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-Sa-3TN" customClass="ImmutableStarsView" customModule="FireEats" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-Sa-3TN" customClass="ImmutableStarsView" customModule="FriendlyEats" customModuleProvider="target">
                                                     <rect key="frame" x="116" y="31.5" width="100" height="20"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -111,26 +111,26 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="7u1-C1-6cU">
                                 <rect key="frame" x="8" y="64" width="359" height="44"/>
                                 <subviews>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qz3-be-flj">
-                                        <rect key="frame" x="0.0" y="12" width="108" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="San Francisco" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qz3-be-flj">
+                                        <rect key="frame" x="-36" y="12" width="0.0" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Burgers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLJ-1I-oz6">
-                                        <rect key="frame" x="132" y="12" width="60" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" ambiguous="YES" text="Burgers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLJ-1I-oz6">
+                                        <rect key="frame" x="-12" y="12" width="0.0" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="$$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c93-Ry-jOd">
-                                        <rect key="frame" x="216" y="12" width="21.5" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" ambiguous="YES" text="$$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c93-Ry-jOd">
+                                        <rect key="frame" x="-12" y="12" width="0.0" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ez2-bq-fpE">
-                                        <rect key="frame" x="261.5" y="7" width="97.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="7" width="359" height="30"/>
                                         <state key="normal" title="Clear"/>
                                         <connections>
                                             <action selector="didTapClearButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BWJ-ON-VBx"/>
@@ -154,7 +154,7 @@
                             <constraint firstAttribute="trailing" secondItem="IIg-Tk-0wa" secondAttribute="trailing" id="xOT-2r-EV0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Fire Eats" id="hCz-AK-Qxr">
+                    <navigationItem key="navigationItem" title="Friendly Eats" id="hCz-AK-Qxr">
                         <barButtonItem key="leftBarButtonItem" title="Populate" id="Akg-Cs-Lgo">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -184,7 +184,7 @@
         <!--Restaurant-->
         <scene sceneID="gFA-Wg-uRD">
             <objects>
-                <viewController storyboardIdentifier="RestaurantDetailViewController" title="Restaurant" automaticallyAdjustsScrollViewInsets="NO" id="yyz-cR-dIw" customClass="RestaurantDetailViewController" customModule="FireEats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RestaurantDetailViewController" title="Restaurant" automaticallyAdjustsScrollViewInsets="NO" id="yyz-cR-dIw" customClass="RestaurantDetailViewController" customModule="FriendlyEats" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SNq-9e-2oH"/>
                         <viewControllerLayoutGuide type="bottom" id="0Ll-AF-CkL"/>
@@ -196,7 +196,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FPu-IJ-I0V">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="Qev-tW-OCy" customClass="RestaurantTitleView" customModule="FireEats" customModuleProvider="target">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="Qev-tW-OCy" customClass="RestaurantTitleView" customModule="FriendlyEats" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -230,7 +230,7 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5p-cL-L2M" customClass="ImmutableStarsView" customModule="FireEats" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5p-cL-L2M" customClass="ImmutableStarsView" customModule="FriendlyEats" customModuleProvider="target">
                                             <rect key="frame" x="16" y="75" width="100" height="20"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -274,7 +274,7 @@
                                     </connections>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReviewTableViewCell" id="gtB-zj-lc3" customClass="ReviewTableViewCell" customModule="FireEats" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReviewTableViewCell" id="gtB-zj-lc3" customClass="ReviewTableViewCell" customModule="FriendlyEats" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="168" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gtB-zj-lc3" id="7Bp-kT-0Hw">
@@ -293,7 +293,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkg-Df-Quk" customClass="ImmutableStarsView" customModule="FireEats" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkg-Df-Quk" customClass="ImmutableStarsView" customModule="FriendlyEats" customModuleProvider="target">
                                                     <rect key="frame" x="267" y="8" width="100" height="20"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -349,7 +349,7 @@
         <!--Write a Review-->
         <scene sceneID="b05-1K-tRE">
             <objects>
-                <viewController storyboardIdentifier="NewReviewViewController" id="Zh5-BZ-GdC" customClass="NewReviewViewController" customModule="FireEats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewReviewViewController" id="Zh5-BZ-GdC" customClass="NewReviewViewController" customModule="FriendlyEats" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HVh-9s-4LQ"/>
                         <viewControllerLayoutGuide type="bottom" id="VtM-ag-3R6"/>
@@ -364,7 +364,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
-                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="5t9-5k-wAi" customClass="RatingView" customModule="FireEats" customModuleProvider="target">
+                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="5t9-5k-wAi" customClass="RatingView" customModule="FriendlyEats" customModuleProvider="target">
                                 <rect key="frame" x="52.5" y="88" width="270" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -411,7 +411,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e54-7U-CFe" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kyk-CK-Ncr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kyk-CK-Ncr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -427,7 +427,7 @@
         <!--Filter-->
         <scene sceneID="rAU-5n-rOd">
             <objects>
-                <viewController id="tw3-Wk-Cua" customClass="FiltersViewController" customModule="FireEats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tw3-Wk-Cua" customClass="FiltersViewController" customModule="FriendlyEats" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GWg-vJ-ItB"/>
                         <viewControllerLayoutGuide type="bottom" id="smP-SM-eDY"/>
@@ -520,7 +520,7 @@
             <objects>
                 <navigationController storyboardIdentifier="FiltersViewController" automaticallyAdjustsScrollViewInsets="NO" id="7qY-fL-a28" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qhf-1r-miG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qhf-1r-miG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
