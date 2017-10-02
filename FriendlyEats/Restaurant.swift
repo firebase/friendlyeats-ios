@@ -40,6 +40,61 @@ struct Restaurant {
 
 extension Restaurant: DocumentSerializable {
 
+  static let cities = [
+    "Albuquerque",
+    "Arlington",
+    "Atlanta",
+    "Austin",
+    "Baltimore",
+    "Boston",
+    "Charlotte",
+    "Chicago",
+    "Cleveland",
+    "Colorado Springs",
+    "Columbus",
+    "Dallas",
+    "Denver",
+    "Detroit",
+    "El Paso",
+    "Fort Worth",
+    "Fresno",
+    "Houston",
+    "Indianapolis",
+    "Jacksonville",
+    "Kansas City",
+    "Las Vegas",
+    "Long Beach",
+    "Los Angeles",
+    "Louisville",
+    "Memphis",
+    "Mesa",
+    "Miami",
+    "Milwaukee",
+    "Nashville",
+    "New York",
+    "Oakland",
+    "Oklahoma",
+    "Omaha",
+    "Philadelphia",
+    "Phoenix",
+    "Portland",
+    "Raleigh",
+    "Sacramento",
+    "San Antonio",
+    "San Diego",
+    "San Francisco",
+    "San Jose",
+    "Tucson",
+    "Tulsa",
+    "Virginia Beach",
+    "Washington"
+  ]
+
+  static let categories = [
+    "Brunch", "Burgers", "Coffee", "Deli", "Dim Sum", "Indian", "Italian",
+    "Mediterranean", "Mexican", "Pizza", "Ramen", "Sushi"
+  ]
+
   init?(dictionary: [String : Any]) {
     guard let name = dictionary["name"] as? String,
         let category = dictionary["category"] as? String,
