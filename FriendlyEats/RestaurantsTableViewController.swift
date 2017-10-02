@@ -75,30 +75,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
     // Display data from Firestore, part one
 
-    listener = query.addSnapshotListener { [unowned self] (snapshot, error) in
-      guard let snapshot = snapshot else {
-        print("Error fetching snapshot results: \(error!)")
-        return
-      }
-      let models = snapshot.documents.map { (document) -> Restaurant in
-        if let model = Restaurant(dictionary: document.data()) {
-          return model
-        } else {
-          // Don't use fatalError here in a real app.
-          fatalError("Unable to initialize type \(Restaurant.self) with dictionary \(document.data())")
-        }
-      }
-      self.restaurants = models
-      self.documents = snapshot.documents
 
-      if self.documents.count > 0 {
-        self.tableView.backgroundView = nil
-      } else {
-        self.tableView.backgroundView = self.backgroundView
-      }
-
-      self.tableView.reloadData()
-    }
   }
 
   fileprivate func stopObserving() {
@@ -176,37 +153,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
       let collection = Firestore.firestore().collection("restaurants")
 
-      let restaurant = Restaurant(
-        name: name,
-        category: category,
-        city: city,
-        price: price,
-        ratingCount: 10,
-        averageRating: 0
-      )
 
-      let restaurantRef = collection.addDocument(data: restaurant.dictionary)
-
-      let batch = Firestore.firestore().batch()
-      guard let user = Auth.auth().currentUser else { continue }
-      var average: Float = 0
-      for _ in 0 ..< 10 {
-        let rating = Int(arc4random_uniform(5) + 1)
-        average += Float(rating) / 10
-        let text = rating > 3 ? "good" : "food was too spicy"
-        let review = Review(rating: rating,
-                            userID: user.uid,
-                            username: user.displayName ?? "Anonymous",
-                            text: text,
-                            date: Date())
-        let ratingRef = restaurantRef.collection("ratings").document()
-        batch.setData(review.dictionary, forDocument: ratingRef)
-      }
-      batch.updateData(["avgRating": average], forDocument: restaurantRef)
-      batch.commit(completion: { (error) in
-        guard let error = error else { return }
-        print("Error generating reviews: \(error). Check your Firestore permissions.")
-      })
     }
   }
 
@@ -271,22 +218,6 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
     }
 
     // Advanced queries
-
-    if let category = category, !category.isEmpty {
-      filtered = filtered.whereField("category", isEqualTo: category)
-    }
-
-    if let city = city, !city.isEmpty {
-      filtered = filtered.whereField("city", isEqualTo: city)
-    }
-
-    if let price = price {
-      filtered = filtered.whereField("price", isEqualTo: price)
-    }
-
-    if let sortBy = sortBy, !sortBy.isEmpty {
-      filtered = filtered.order(by: sortBy)
-    }
 
     return filtered
   }
