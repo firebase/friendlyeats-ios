@@ -7,7 +7,7 @@ target 'FriendlyEats' do
   pod 'SDWebImage'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
-  pod 'Firestore', :podspec => 'https://storage.googleapis.com/firebase-preview-drop/ios/firestore/0.7.0/Firestore.podspec.json'
+  pod 'Firebase/Firestore'
 
   target 'FriendlyEatsTests' do
     inherit! :search_paths
