@@ -274,12 +274,6 @@ class RestaurantTableViewCell: UITableViewCell {
 
     // Displaying data, part two
 
-    nameLabel.text = restaurant.name
-    cityLabel.text = restaurant.city
-    categoryLabel.text = restaurant.category
-    starsView.rating = Int(restaurant.averageRating.rounded())
-    priceLabel.text = priceString(from: restaurant.price)
-
     let image = imageURL(from: restaurant.name)
     thumbnailView.sd_setImage(with: image)
   }
