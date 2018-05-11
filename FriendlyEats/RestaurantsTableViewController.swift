@@ -15,8 +15,7 @@
 //
 
 import UIKit
-import FirebaseAuthUI
-import FirebaseGoogleAuthUI
+import FirebaseUI
 import FirebaseFirestore
 import SDWebImage
 
