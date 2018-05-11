@@ -18,7 +18,7 @@ import UIKit
 import SDWebImage
 import FirebaseFirestore
 import Firebase
-import FirebaseAuthUI
+import FirebaseUI
 
 class RestaurantDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewReviewViewControllerDelegate {
 
@@ -144,7 +144,8 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
       }
 
       // Error if the restaurant data in Firestore has somehow changed or is malformed.
-      guard let restaurant = Restaurant(dictionary: restaurantSnapshot.data()) else {
+      guard let data = restaurantSnapshot.data(),
+        let restaurant = Restaurant(dictionary: data) else {
         let error = NSError(domain: "FriendlyEatsErrorDomain", code: 0, userInfo: [
           NSLocalizedDescriptionKey: "Unable to write to restaurant at Firestore path: \(reference.path)"
           ])
