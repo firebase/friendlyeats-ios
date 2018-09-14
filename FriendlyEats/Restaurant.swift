@@ -15,6 +15,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct Restaurant {
 
@@ -140,9 +141,9 @@ extension Review: DocumentSerializable {
         let userID = dictionary["userId"] as? String,
         let username = dictionary["userName"] as? String,
         let text = dictionary["text"] as? String,
-        let date = dictionary["timestamp"] as? Date else { return nil }
+        let date = dictionary["timestamp"] as? Timestamp else { return nil }
     
-    self.init(rating: rating, userID: userID, username: username, text: text, date: date)
+    self.init(rating: rating, userID: userID, username: username, text: text, date: date.dateValue())
   }
 
 }
