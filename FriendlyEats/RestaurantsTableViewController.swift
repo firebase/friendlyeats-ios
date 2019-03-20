@@ -85,9 +85,6 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
     // Firestore needs to use Timestamp type instead of Date type.
     // https://firebase.google.com/docs/reference/swift/firebasefirestore/api/reference/Classes/FirestoreSettings
     let firestore: Firestore = Firestore.firestore()
-    let settings = firestore.settings
-    settings.areTimestampsInSnapshotsEnabled = true
-    firestore.settings = settings
     return firestore.collection("restaurants").limit(to: 50)
   }
 
