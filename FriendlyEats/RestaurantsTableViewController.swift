@@ -106,7 +106,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
       UIColor(red: 0x3d/0xff, green: 0x5a/0xff, blue: 0xfe/0xff, alpha: 1.0)
     navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.titleTextAttributes =
-      [ NSForegroundColorAttributeName: UIColor.white ]
+      convertToOptionalNSAttributedStringKeyDictionary([ NSAttributedString.Key.foregroundColor.rawValue: UIColor.white ])
 
     tableView.dataSource = self
     tableView.delegate = self
@@ -285,4 +285,10 @@ class RestaurantTableViewCell: UITableViewCell {
     thumbnailView.sd_cancelCurrentImageLoad()
   }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

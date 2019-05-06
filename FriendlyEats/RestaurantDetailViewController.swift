@@ -51,7 +51,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     tableView.tableFooterView = UIView()
 
     tableView.dataSource = self
-    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 140
 
     let query = restaurantReference!.collection("ratings")
