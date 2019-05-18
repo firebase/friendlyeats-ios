@@ -68,14 +68,14 @@ PODS:
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.2.0):
-    - GoogleToolboxForMac/Defines (= 2.2.0)
-  - GoogleToolboxForMac/Defines (2.2.0)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.0)":
-    - GoogleToolboxForMac/DebugUtils (= 2.2.0)
-    - GoogleToolboxForMac/Defines (= 2.2.0)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.0)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
+  - GoogleToolboxForMac/DebugUtils (2.2.1):
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+  - GoogleToolboxForMac/Defines (2.2.1)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.1)":
+    - GoogleToolboxForMac/DebugUtils (= 2.2.1)
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.1)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.2.1)"
   - GoogleUtilities/AppDelegateSwizzler (5.8.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -110,7 +110,7 @@ PODS:
     - gRPC-Core/Interface (= 1.17.0)
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.17.0)
-  - GTMSessionFetcher/Core (1.2.1)
+  - GTMSessionFetcher/Core (1.2.2)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -118,9 +118,9 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.7.0)
-  - SDWebImage (5.0.2):
-    - SDWebImage/Core (= 5.0.2)
-  - SDWebImage/Core (5.0.2)
+  - SDWebImage (5.0.3):
+    - SDWebImage/Core (= 5.0.3)
+  - SDWebImage/Core (5.0.3)
 
 DEPENDENCIES:
   - Firebase/Core
@@ -164,15 +164,15 @@ SPEC CHECKSUMS:
   FirebaseUI: 09519bf436a055cd696bf68687d624423150e4c0
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
-  GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
+  GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
   GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
   "gRPC-C++": e76441995900ac90e9bd98644ab4733f12521edf
   gRPC-Core: 4028031ed2c5267cca0d846c876d8046b1ecb9b6
-  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
-  SDWebImage: 6764b5fa0f73c203728052955dbefa2bf1f33282
+  SDWebImage: d4f87d7d36c8a4d9f9459dc282e0caa057fdf935
 
 PODFILE CHECKSUM: eea462f0ff653e098dced9896f2b0b1c10459d13
 
