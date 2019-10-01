@@ -138,9 +138,9 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.9.2)
-  - SDWebImage (5.2.0):
-    - SDWebImage/Core (= 5.2.0)
-  - SDWebImage/Core (5.2.0)
+  - SDWebImage (5.2.1):
+    - SDWebImage/Core (= 5.2.1)
+  - SDWebImage/Core (5.2.1)
 
 DEPENDENCIES:
   - Firebase/Core
@@ -203,7 +203,7 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
-  SDWebImage: 609192dcf3898c910a2848032372ead951e66364
+  SDWebImage: 336f6958a13d5e8347a317cd68a9f6ee9aaaaf03
 
 PODFILE CHECKSUM: 46fdb587c93b067fa60b7e974b1f113df30c4f4b
 
