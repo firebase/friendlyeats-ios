@@ -82,10 +82,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
   }
 
   fileprivate func baseQuery() -> Query {
-    // Firestore needs to use Timestamp type instead of Date type.
-    // https://firebase.google.com/docs/reference/swift/firebasefirestore/api/reference/Classes/FirestoreSettings
-    let firestore: Firestore = Firestore.firestore()
-    return firestore.collection("restaurants").limit(to: 50)
+    return Firestore.firestore().collection("restaurants").limit(to: 50)
   }
 
   lazy private var filters: (navigationController: UINavigationController,
@@ -158,10 +155,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
       let city = cities[Int(arc4random_uniform(UInt32(cities.count)))]
       let price = Int(arc4random_uniform(3)) + 1
 
-      // Basic writes
-
-      let collection = Firestore.firestore().collection("restaurants")
-
+      // Write Data to Firestore
 
     }
   }

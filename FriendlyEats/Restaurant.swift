@@ -128,7 +128,7 @@ struct Review {
       "userId": userID,
       "userName": username,
       "text": text,
-      "timestamp": date
+      "timestamp": Timestamp(date: date)
     ]
   }
 
