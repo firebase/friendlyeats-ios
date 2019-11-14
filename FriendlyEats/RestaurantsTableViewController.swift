@@ -220,7 +220,7 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
       activeFiltersStackView.isHidden = false
     }
 
-    // Advanced queries
+    // Sorting and Filtering Data
 
     return filtered
   }
