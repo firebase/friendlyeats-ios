@@ -178,7 +178,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
       let city = cities[Int(arc4random_uniform(UInt32(cities.count)))]
       let price = Int(arc4random_uniform(3)) + 1
 
-      // Basic writes
+      // Write Data to Firestore
 
       let collection = Firestore.firestore().collection("restaurants")
 
