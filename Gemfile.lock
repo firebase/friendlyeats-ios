@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/CocoaPods/Core.git
-  revision: c00aed1dce1e757cbdd44c53115e8bbd23214776
+  revision: fe333815bcb83d144d4a5d9d46a93257cfcb9b57
   specs:
     cocoapods-core (1.11.3)
       activesupport (>= 5.0, < 7)
@@ -93,7 +93,7 @@ GEM
     nanaimo (0.3.0)
     nap (1.1.0)
     netrc (0.11.0)
-    public_suffix (4.0.6)
+    public_suffix (4.0.7)
     rexml (3.2.5)
     ruby-macho (2.5.1)
     typhoeus (1.4.0)
