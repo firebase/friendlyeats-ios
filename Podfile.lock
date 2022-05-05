@@ -618,8 +618,8 @@ PODS:
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/Environment (~> 7.7)
     - GTMSessionFetcher/Core (~> 1.5)
-  - FirebaseAuthUI (12.1.1):
-    - FirebaseAuth (~> 8.0)
+  - FirebaseAuthUI (12.2.0):
+    - FirebaseAuth (< 10.0, >= 8.0)
     - FirebaseCore
   - FirebaseCore (8.15.0):
     - FirebaseCoreDiagnostics (~> 8.0)
@@ -630,7 +630,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/Logger (~> 7.7)
     - nanopb (~> 2.30908.0)
-  - FirebaseEmailAuthUI (12.1.1):
+  - FirebaseEmailAuthUI (12.2.0):
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
@@ -648,16 +648,16 @@ PODS:
     - "gRPC-C++ (~> 1.44.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 2.30908.0)
-  - FirebaseGoogleAuthUI (12.1.1):
+  - FirebaseGoogleAuthUI (12.2.0):
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
     - GoogleSignIn (~> 6.0)
-  - FirebaseUI/Auth (12.1.1):
+  - FirebaseUI/Auth (12.2.0):
     - FirebaseAuthUI (~> 12.0)
-  - FirebaseUI/Email (12.1.1):
+  - FirebaseUI/Email (12.2.0):
     - FirebaseEmailAuthUI (~> 12.0)
-  - FirebaseUI/Google (12.1.1):
+  - FirebaseUI/Google (12.2.0):
     - FirebaseGoogleAuthUI (~> 12.0)
   - GoogleDataTransport (9.1.2):
     - GoogleUtilities/Environment (~> 7.2)
@@ -796,13 +796,13 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   Firebase: 5f8193dff4b5b7c5d5ef72ae54bb76c08e2b841d
   FirebaseAuth: 3e73bf8abf4fbb40f8b421f361f4cc48ee57388c
-  FirebaseAuthUI: 71ad7db60f0e3eb34b790868163dde99fde6d989
+  FirebaseAuthUI: 9381cd32c4efcaf3550f4a95dd176fc73da253ee
   FirebaseCore: 5743c5785c074a794d35f2fff7ecc254a91e08b1
   FirebaseCoreDiagnostics: 92e07a649aeb66352b319d43bdd2ee3942af84cb
-  FirebaseEmailAuthUI: d4b6c4f450dccc7764ec83b6884ebf2c700d1a7e
+  FirebaseEmailAuthUI: 9d6de47961cd1fa9be0003ad3cc4763fdd20560f
   FirebaseFirestore: d7023faff8e1b4fd69d0adbcf18e65129bc03842
-  FirebaseGoogleAuthUI: 00f4a3ff878bb96ba5a04cb7752b08235a3dbd9e
-  FirebaseUI: dc90cd9081a0c2dcb94413cfdac3f1b662205c42
+  FirebaseGoogleAuthUI: 978ae1845a5c9111fdf4c2e05708edb0a224bed3
+  FirebaseUI: 33ee19f70792fae68bee5cbbbf93733baa2cc7fa
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleSignIn: c90b5bec45e780f54c6a8e1e3c182a86e3dda69d
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
