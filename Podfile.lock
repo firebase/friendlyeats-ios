@@ -752,9 +752,9 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.1.1)
-  - SDWebImage (5.12.6):
-    - SDWebImage/Core (= 5.12.6)
-  - SDWebImage/Core (5.12.6)
+  - SDWebImage (5.13.0):
+    - SDWebImage/Core (= 5.13.0)
+  - SDWebImage/Core (5.13.0)
 
 DEPENDENCIES:
   - Firebase/Firestore (~> 8.0)
@@ -814,7 +814,7 @@ SPEC CHECKSUMS:
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  SDWebImage: a47aea9e3d8816015db4e523daff50cfd294499d
+  SDWebImage: 0327043dbb9533e75f2eff8445b3df0f2ceca6ac
 
 PODFILE CHECKSUM: ad292a8c575e0933d02298d79fde09688de0d54d
 
