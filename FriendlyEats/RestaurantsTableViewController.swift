@@ -45,13 +45,13 @@ private func imageURL(from string: String) -> URL {
 
 class RestaurantsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-  @IBOutlet var tableView: UITableView!
-  @IBOutlet var activeFiltersStackView: UIStackView!
-  @IBOutlet var stackViewHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var activeFiltersStackView: UIStackView!
+  @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
 
-  @IBOutlet var cityFilterLabel: UILabel!
-  @IBOutlet var categoryFilterLabel: UILabel!
-  @IBOutlet var priceFilterLabel: UILabel!
+  @IBOutlet weak var cityFilterLabel: UILabel!
+  @IBOutlet weak var categoryFilterLabel: UILabel!
+  @IBOutlet weak var priceFilterLabel: UILabel!
 
   let backgroundView = UIImageView()
 
@@ -277,7 +277,7 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
       activeFiltersStackView.isHidden = false
     }
 
-    // Advanced queries
+    // Sorting and Filtering Data
 
     if let category = category, !category.isEmpty {
       filtered = filtered.whereField("category", isEqualTo: category)
@@ -334,17 +334,17 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
 
 class RestaurantTableViewCell: UITableViewCell {
 
-  @IBOutlet private var thumbnailView: UIImageView!
+  @IBOutlet weak private var thumbnailView: UIImageView!
 
-  @IBOutlet private var nameLabel: UILabel!
+  @IBOutlet weak private var nameLabel: UILabel!
 
-  @IBOutlet var starsView: ImmutableStarsView!
+  @IBOutlet weak var starsView: ImmutableStarsView!
 
-  @IBOutlet private var cityLabel: UILabel!
+  @IBOutlet weak private var cityLabel: UILabel!
 
-  @IBOutlet private var categoryLabel: UILabel!
+  @IBOutlet weak private var categoryLabel: UILabel!
 
-  @IBOutlet private var priceLabel: UILabel!
+  @IBOutlet weak private var priceLabel: UILabel!
 
   func populate(restaurant: Restaurant) {
 

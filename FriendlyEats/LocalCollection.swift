@@ -50,13 +50,7 @@ final class LocalCollection<T: DocumentSerializable> {
   }
 
   func index(of document: DocumentSnapshot) -> Int? {
-    for i in 0 ..< documents.count {
-      if documents[i].documentID == document.documentID {
-        return i
-      }
-    }
-
-    return nil
+    return documents.firstIndex(where: { $0.documentID == document.documentID })
   }
 
   func listen() {

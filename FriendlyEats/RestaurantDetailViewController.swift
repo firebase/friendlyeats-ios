@@ -173,22 +173,21 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         }
       }
     }
-
   }
 
 }
 
 class RestaurantTitleView: UIView {
 
-  @IBOutlet var nameLabel: UILabel!
+  @IBOutlet weak var nameLabel: UILabel!
 
-  @IBOutlet var categoryLabel: UILabel!
+  @IBOutlet weak var categoryLabel: UILabel!
 
-  @IBOutlet var cityLabel: UILabel!
+  @IBOutlet weak var cityLabel: UILabel!
 
-  @IBOutlet var priceLabel: UILabel!
+  @IBOutlet weak var priceLabel: UILabel!
 
-  @IBOutlet var starsView: ImmutableStarsView! {
+  @IBOutlet weak var starsView: ImmutableStarsView! {
     didSet {
       starsView.highlightedColor = UIColor.white.cgColor
     }
@@ -229,11 +228,11 @@ class RestaurantTitleView: UIView {
 
 class ReviewTableViewCell: UITableViewCell {
 
-  @IBOutlet var usernameLabel: UILabel!
+  @IBOutlet weak var usernameLabel: UILabel!
 
-  @IBOutlet var reviewContentsLabel: UILabel!
+  @IBOutlet weak var reviewContentsLabel: UILabel!
 
-  @IBOutlet var starsView: ImmutableStarsView!
+  @IBOutlet weak var starsView: ImmutableStarsView!
 
   func populate(review: Review) {
     usernameLabel.text = review.username
