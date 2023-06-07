@@ -181,6 +181,39 @@ class RestaurantsTableViewController: UIViewController, UITableViewDataSource, U
 
       // Write Data to Firestore
 
+      let collection = Firestore.firestore().collection("restaurants")
+
+      let restaurant = Restaurant(
+        name: name,
+        category: category,
+        city: city,
+        price: price,
+        ratingCount: 10,
+        averageRating: 0
+      )
+
+      let restaurantRef = collection.addDocument(data: restaurant.dictionary)
+
+      let batch = Firestore.firestore().batch()
+      guard let user = Auth.auth().currentUser else { continue }
+      var average: Float = 0
+      for _ in 0 ..< 10 {
+        let rating = Int(arc4random_uniform(5) + 1)
+        average += Float(rating) / 10
+        let text = rating > 3 ? "good" : "food was too spicy"
+        let review = Review(rating: rating,
+                            userID: user.uid,
+                            username: user.displayName ?? "Anonymous",
+                            text: text,
+                            date: Date())
+        let ratingRef = restaurantRef.collection("ratings").document()
+        batch.setData(review.dictionary, forDocument: ratingRef)
+      }
+      batch.updateData(["avgRating": average], forDocument: restaurantRef)
+      batch.commit(completion: { (error) in
+        guard let error = error else { return }
+        print("Error generating reviews: \(error). Check your Firestore permissions.")
+      })
     }
   }
 
@@ -246,6 +279,22 @@ extension RestaurantsTableViewController: FiltersViewControllerDelegate {
 
     // Sorting and Filtering Data
 
+    if let category = category, !category.isEmpty {
+      filtered = filtered.whereField("category", isEqualTo: category)
+    }
+
+    if let city = city, !city.isEmpty {
+      filtered = filtered.whereField("city", isEqualTo: city)
+    }
+
+    if let price = price {
+      filtered = filtered.whereField("price", isEqualTo: price)
+    }
+
+    if let sortBy = sortBy, !sortBy.isEmpty {
+      filtered = filtered.order(by: sortBy)
+    }
+
     return filtered
   }
 
@@ -300,6 +349,12 @@ class RestaurantTableViewCell: UITableViewCell {
   func populate(restaurant: Restaurant) {
 
     // Displaying data, part two
+
+    nameLabel.text = restaurant.name
+    cityLabel.text = restaurant.city
+    categoryLabel.text = restaurant.category
+    starsView.rating = Int(restaurant.averageRating.rounded())
+    priceLabel.text = priceString(from: restaurant.price)
 
     let image = imageURL(from: restaurant.name)
     thumbnailView.sd_setImage(with: image)
