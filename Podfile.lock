@@ -653,7 +653,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
     - RecaptchaInterop (~> 100.0)
-  - FirebaseAuthUI (13.0.0):
+  - FirebaseAuthUI (13.1.0):
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseCore
   - FirebaseCore (10.15.0):
@@ -662,7 +662,7 @@ PODS:
     - GoogleUtilities/Logger (~> 7.8)
   - FirebaseCoreInternal (10.15.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseEmailAuthUI (13.0.0):
+  - FirebaseEmailAuthUI (13.1.0):
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
@@ -680,16 +680,16 @@ PODS:
     - "gRPC-C++ (~> 1.50.1)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseGoogleAuthUI (13.0.0):
+  - FirebaseGoogleAuthUI (13.1.0):
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
     - GoogleSignIn (~> 6.0)
-  - FirebaseUI/Auth (13.0.0):
+  - FirebaseUI/Auth (13.1.0):
     - FirebaseAuthUI (~> 13.0)
-  - FirebaseUI/Email (13.0.0):
+  - FirebaseUI/Email (13.1.0):
     - FirebaseEmailAuthUI (~> 13.0)
-  - FirebaseUI/Google (13.0.0):
+  - FirebaseUI/Google (13.1.0):
     - FirebaseGoogleAuthUI (~> 13.0)
   - GoogleSignIn (6.2.4):
     - AppAuth (~> 1.5)
@@ -830,13 +830,13 @@ SPEC CHECKSUMS:
   Firebase: 66043bd4579e5b73811f96829c694c7af8d67435
   FirebaseAppCheckInterop: a8c555b1c2db1d9445e6c3a08a848167ddb7eb51
   FirebaseAuth: a55ec5f7f8a5b1c2dd750235c1bb419bfb642445
-  FirebaseAuthUI: 870e22bebf5d9844cab1ded173c68e06041f90c8
+  FirebaseAuthUI: 9b4de780078d674019a2bfc560bb812f23b45ff1
   FirebaseCore: 2cec518b43635f96afe7ac3a9c513e47558abd2e
   FirebaseCoreInternal: 2f4bee5ed00301b5e56da0849268797a2dd31fb4
-  FirebaseEmailAuthUI: 940ed59d732cef15d5fc69cb326d40eedac2b062
+  FirebaseEmailAuthUI: 548b1b5b557b67b15fd3197d18da29d91a154ef8
   FirebaseFirestore: b4c0eaaf24efda5732ec21d9e6c788d083118ca6
-  FirebaseGoogleAuthUI: 5ee55f2b430cf8c4ec15b359a34bc534c71051d3
-  FirebaseUI: 2453fbe76553b738ae3642eb12bf2891c12485ea
+  FirebaseGoogleAuthUI: 420e5b1c10f13a47c18579303d93275842f1a8a0
+  FirebaseUI: d3e0d3f81f5c464554945195a6133a3ab905b6a7
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
