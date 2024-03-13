@@ -628,11 +628,11 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - AppAuth (1.6.2):
-    - AppAuth/Core (= 1.6.2)
-    - AppAuth/ExternalUserAgent (= 1.6.2)
-  - AppAuth/Core (1.6.2)
-  - AppAuth/ExternalUserAgent (1.6.2):
+  - AppAuth (1.7.2):
+    - AppAuth/Core (= 1.7.2)
+    - AppAuth/ExternalUserAgent (= 1.7.2)
+  - AppAuth/Core (1.7.2)
+  - AppAuth/ExternalUserAgent (1.7.2):
     - AppAuth/Core
   - BoringSSL-GRPC (0.0.24):
     - BoringSSL-GRPC/Implementation (= 0.0.24)
@@ -845,7 +845,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
-  AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
+  AppAuth: ca2458caccec349cc1e26d8d9e8fd7d22f1d01f3
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   Firebase: 797fd7297b7e1be954432743a0b3f90038e45a71
   FirebaseAppCheckInterop: 58db3e9494751399cf3e7b7e3e705cff71099153
